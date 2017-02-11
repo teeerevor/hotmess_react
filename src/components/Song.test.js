@@ -1,12 +1,9 @@
-import React              from 'react';
-import { shallow, mount } from 'enzyme';
-import { expect }         from 'chai';
-import sinon              from 'sinon';
-import pubsub             from 'pubsub-js';
-import Song               from './Song';
-import SongAudio          from './SongAudio';
-import AudioTrack         from './AudioTrack';
-import InlineSvg          from './InlineSvg';
+import React       from 'react';
+import { shallow } from 'enzyme';
+import { expect }  from 'chai';
+import Song        from './Song';
+import SongAudio   from './SongAudio';
+import InlineSvg   from './InlineSvg';
 
 function mockItem(overides = {}) {
   let songData = {
@@ -18,7 +15,7 @@ function mockItem(overides = {}) {
       sortBy         : 'song'
   };
 
-  for(var key in overides){
+  for(let key in overides){
     if (!songData.hasOwnProperty(key)) continue;
     songData[key] = overides[key];
   }

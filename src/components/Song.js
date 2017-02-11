@@ -1,5 +1,5 @@
-import React      from 'react';
-import classNames from 'classnames'
+import React, {PropTypes} from 'react';
+import classNames from 'classnames';
 import InlineSvg  from './InlineSvg';
 import SongAudio  from './SongAudio';
 import PubSub     from 'pubsub-js';
@@ -13,28 +13,6 @@ class Song extends React.Component {
     };
   }
 
-  render() {
-    const {open, shortlisted} = this.state;
-    const {song, sortBy} = this.props;
-
-    var classes = classNames({
-      'song': true,
-      'open': open,
-      'shortlisted': shortlisted
-    });
-    return (
-      <li className={classes} data-id={this.props.song.id}>
-        <div className='song-display' onClick={this.toggleDisplay}>
-          {this.arrangeSongInfo(song, sortBy)}
-          {this.renderAudio(song, open)}
-          <InlineSvg iconClass={'hover-play'} iconName={'#play'} />
-          <InlineSvg iconClass={'icon-selected'} iconName={'#tick'} />
-        </div>
-        <button className='circle-button top' onClick={this.shortlistTop} > <InlineSvg iconClass={'icon-top'} iconName={'#arrow-circ'} /> </button>
-        <button className='circle-button add' onClick={this.shortlistAdd} > <InlineSvg iconClass={'icon-plus'} iconName={'#plus-circ'} /> </button>
-      </li>
-    );
-  }
 
   componentWillReceiveProps(nextProps) {
     this.setState({open: nextProps.open});
@@ -42,11 +20,11 @@ class Song extends React.Component {
 
   renderAudio = (song, open=false) => {
     if( open )
-      return <SongAudio song={song} />
+      return <SongAudio song={song} />;
   }
 
   toggleDisplay = () => {
-    this.state.open ? this.setState({open: false}) : this.setState({open: true})
+    this.state.open ? this.setState({open: false}) : this.setState({open: true});
   }
 
   arrangeSongInfo = (song, sortBy = 'song') => {
@@ -66,20 +44,44 @@ class Song extends React.Component {
   }
 
   shortlistAdd = () => {
-    this.setState({shortlisted: true})
+    this.setState({shortlisted: true});
     PubSub.publish( 'addSong', this.props.song);
   }
 
   shortlistTop = () => {
-    this.setState({shortlisted: true})
+    this.setState({shortlisted: true});
     PubSub.publish( 'topSong', this.props.song);
+  }
+
+  render() {
+    const {open, shortlisted} = this.state;
+    const {song, sortBy} = this.props;
+
+    let classes = classNames({
+      'song': true,
+      'open': open,
+      'shortlisted': shortlisted
+    });
+    return (
+      <li className={classes} data-id={this.props.song.id}>
+        <div className="song-display" onClick={this.toggleDisplay}>
+          {this.arrangeSongInfo(song, sortBy)}
+          {this.renderAudio(song, open)}
+          <InlineSvg iconClass={'hover-play'} iconName={'#play'} />
+          <InlineSvg iconClass={'icon-selected'} iconName={'#tick'} />
+        </div>
+        <button className="circle-button top" onClick={this.shortlistTop} > <InlineSvg iconClass={'icon-top'} iconName={'#arrow-circ'} /> </button>
+        <button className="circle-button add" onClick={this.shortlistAdd} > <InlineSvg iconClass={'icon-plus'} iconName={'#plus-circ'} /> </button>
+      </li>
+    );
   }
 }
 
-export default Song
+Song.propTypes = {
+  song: PropTypes.object.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  shortlisted: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired
+};
 
-
-
-
-
-
+export default Song;

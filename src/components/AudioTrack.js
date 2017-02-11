@@ -61,8 +61,8 @@ export default class AudioTrack extends React.Component {
     return(
         <audio id={this.songId()}
               src={this.props.song.jjj_preview}
-              className='jjj-audio'
-              controls='false'
+              className="jjj-audio"
+              controls="false"
               onPlaying={this.playing}
               onPlay={this.playing}
               onPause={this.paused}
