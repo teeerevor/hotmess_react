@@ -5,12 +5,14 @@ import PubSub   from 'pubsub-js';
 export default class YoutubeTrack extends React.Component {
   componentWillMount() {
     let thisPlayer = this;
+    /* eslint-disable */
     this.pubsubPlay = PubSub.subscribe('playerPlay', function(topic, song) {
       thisPlayer.play(song);
     }.bind(this));
-    this.pubsubPause = PubSub.subscribe('playerPause', function() {
+    this.pubsubPause = PubSub.subscribe('playerPause', function(topic) {
       thisPlayer.pause();
     }.bind(this));
+    /* eslint-enable */
   }
 
   componentDidMount() {

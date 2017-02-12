@@ -10,7 +10,7 @@ class Song extends React.Component {
     this.state = {
       open: props.open || false,
       shortlisted: props.shortlisted || false,
-      shortlisted: props.sortBy || 'song'
+      sortBy: props.sortBy || 'song'
     };
   }
 
@@ -29,13 +29,13 @@ class Song extends React.Component {
   }
 
   arrangeSongInfo(song, sortBy) {
-    if(sortBy == 'song')
+    if(sortBy === 'song')
       return (<span className="text">
                 <b>
                   {song.name}
                 </b>
                 &nbsp;-&nbsp;
-                {song.artistName}
+                {song.artist}
               </span>);
     else
       return (<span className="text">
@@ -59,9 +59,9 @@ class Song extends React.Component {
     const {song, sortBy} = this.props;
 
     let classes = classNames({
-      'song': true,
-      'open': open,
-      'shortlisted': shortlisted
+      song: true,
+      open,
+      shortlisted,
     });
     return (
       <li className={classes} data-id={this.props.song.id}>
@@ -79,7 +79,10 @@ class Song extends React.Component {
 }
 
 Song.propTypes = {
-  song: PropTypes.object.isRequired
+  song: PropTypes.object.isRequired,
+  sortBy: PropTypes.string,
+  open: PropTypes.bool,
+  shortlisted: PropTypes.bool,
 };
 
 export default Song;
