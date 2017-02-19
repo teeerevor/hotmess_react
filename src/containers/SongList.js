@@ -4,7 +4,7 @@ import PubSub from 'pubsub-js';
 import SongListFilter from '../utils/SongListFilter';
 import { fetchSongs } from '../actions/songListActions'
 import InlineSvg from '../components/InlineSvg';
-import Song from '../components/Song';
+import Song from '../components/song/Song';
 
 let filter = new SongListFilter();
 

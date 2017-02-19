@@ -1,13 +1,12 @@
 import React, {PropTypes} from 'react';
-import classNames         from 'classnames';
-import IconPlus           from './svgs/IconPlus';
-import IconUparrow        from './svgs/IconUparrow';
-import IconPlay           from './svgs/IconPlay';
-import IconTick           from './svgs/IconTick';
-import SongAudio          from './SongAudio';
+import IconPlus           from '../svgs/IconPlus';
+import IconUparrow        from '../svgs/IconUparrow';
+import IconPlay           from '../svgs/IconPlay';
+import IconTick           from '../svgs/IconTick';
+import SongAudio          from '../song_audio/SongAudio';
 import PubSub             from 'pubsub-js';
 import styles             from './Song.styl';
-import btns               from '../styles/buttons.styl';
+import btns               from '../../styles/buttons.styl';
 
 class Song extends React.Component {
   constructor(props) {
@@ -63,12 +62,13 @@ class Song extends React.Component {
     const {open, shortlisted} = this.state;
     const {song, sortBy} = this.props;
 
-    let classes = classNames({
-      open,
-      shortlisted,
-    });
+    let className = styles.song;
+    if (open) className = styles.open;
+    if (shortlisted) className = styles.shortlisted;
+    if (open && shortlisted) className = styles.openAndShortlisted;
+
     return (
-      <li className={styles.song} data-id={this.props.song.id}>
+      <li className={className} data-id={this.props.song.id}>
         <div className={styles.tag} onClick={this.toggleDisplay}>
           {this.arrangeSongInfo(song, sortBy)}
           {this.renderAudio(song, open)}

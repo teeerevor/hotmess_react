@@ -2,8 +2,8 @@ import React       from 'react';
 import { shallow } from 'enzyme';
 import { expect }  from 'chai';
 import Song        from './Song';
-import SongAudio   from './SongAudio';
-import IconTick    from './svgs/IconTick';
+import SongAudio   from '../song_audio/SongAudio';
+import IconTick    from '../svgs/IconTick';
 
 function mockItem(overides = {}) {
   let songData = {
@@ -40,7 +40,7 @@ describe('<Song />', () => {
   it('shows SongAudio when item is clicked', () => {
     const item          = mockItem(),
           wrapper       = shallow(<Song song = {item} />);
-    wrapper.find('div.song-display').simulate('click');
+    wrapper.find('div').simulate('click');
     expect(wrapper.find(SongAudio)).to.have.length(1);
   });
 
@@ -51,19 +51,19 @@ describe('<Song />', () => {
     expect(wrapper.find(IconTick)).to.have.length(1);
   });
 
-  it('calls shortlistAdd when a song is added', () => {
+  it('shows song as shortlisted when song is added', () => {
     const item     = mockItem(),
           wrapper  = shallow(<Song song={item} />);
 
-    wrapper.find('button.add').simulate('click');
+    wrapper.find('button').last().simulate('click');
     expect(wrapper.hasClass('shortlisted')).to.be.true;
   });
 
-  it('publishes when a song is added to top', () => {
+  it('shows song as shortlisted when song is added to top', () => {
     const item     = mockItem(),
           wrapper  = shallow(<Song song={item} />);
 
-    wrapper.find('button.top').simulate('click');
+    wrapper.find('button').first().simulate('click');
     expect(wrapper.hasClass('shortlisted')).to.be.true;
   });
 });

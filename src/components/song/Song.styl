@@ -1,4 +1,4 @@
-@import '../styles/colours'
+@import '../../styles/colours'
 
 $song-padding-hoz= 8px
 $song-padding-vert= 15px
@@ -20,21 +20,35 @@ $song-bottom-margin= 3px
     .iconPlay
       transform: translateX(-30px)
 
-  &.shortlisted
-    .tag
-      background-color: rgba(199,235,95,0.4)
-    .circleButton
-      opacity: 0
-    .iconSelected
-      display: inline
-    .iconPlay
-      opacity: 0
-  &.open
-    .iconPlay
-      opacity: 0
-    .tag
-      background: $song-background
-      padding-bottom: 15px
+.shortlisted
+  @extend .song
+  .circleButton
+    opacity: 0
+  .iconSelected
+    display: inline
+  .iconPlay
+    opacity: 0
+
+.open
+  @extend .song
+  .iconPlay
+    opacity: 0
+  .tag
+    background: $song-background
+    padding-bottom: 15px
+
+.oponAndShortlisted
+  @extend .song
+  .circleButton
+    opacity: 0
+  .iconSelected
+    display: inline
+  .iconPlay
+    opacity: 0
+  .tag
+    background: $song-background
+    padding-bottom: 15px
+
 
 .iconSelected,
 .iconPlay
