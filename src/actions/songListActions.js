@@ -9,10 +9,10 @@ function requestSongs() {
   };
 }
 
-function receiveSongs(json) {
+function receiveSongs(data) {
   return {
     type: RECEIVE_SONGS,
-    songs: json,
+    songData: data,
     receivedAt: Date.now()
   };
 }
