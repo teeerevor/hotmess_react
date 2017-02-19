@@ -1,12 +1,10 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux'
 import PubSub from 'pubsub-js';
-import SongListFilter from '../utils/SongListFilter';
 import { fetchSongs } from '../actions/songListActions'
 import InlineSvg from '../components/InlineSvg';
 import Song from '../components/song/Song';
 
-let filter = new SongListFilter();
 
 class SongList  extends React.Component {
   //getInitialState() {
@@ -237,10 +235,8 @@ class SongList  extends React.Component {
     let {songs} = this.props;
     let songBlock;
 
-    console.log('songs='+songs);
     if (songs && songs.length > 0) {
-      let filteredSongs = filter.filterSongs(songs, 'song', 'top', 'top');
-      songBlock = this.renderSongList(filteredSongs);
+      songBlock = this.renderSongList(songs);
     } else {
       songBlock = this.renderEmptyState();
     }
