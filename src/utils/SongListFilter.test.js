@@ -50,11 +50,13 @@ describe('SongListFilter', () => {
       expect('!').to.match(filter.handleTop('top'));
       expect('1').to.match(filter.handleTop('top'));
       expect('a').to.match(filter.handleTop('top'));
+      expect('c').to.not.match(filter.handleTop('top'));
     });
 
     it('should return extended range regexs', () => {
       expect('b').to.match(filter.handleTop('c'));
       expect('c').to.match(filter.handleTop('c'));
+      expect('d').to.not.match(filter.handleTop('c'));
     });
   });
 
@@ -97,15 +99,15 @@ describe('SongListFilter', () => {
   return describe('filterSongs', () => {
     let aagg = {
       name: 'aa',
-      artistName: 'gg'
+      artist: 'gg'
     };
     let bbee = {
       name: 'bb',
-      artistName: 'ee'
+      artist: 'ee'
     };
     let ccdd = {
       name: 'cc',
-      artistName: 'dd'
+      artist: 'dd'
     };
     let songs = [aagg, bbee, ccdd];
 

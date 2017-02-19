@@ -37,7 +37,7 @@ export default class SongListFilter{
 
   handleTop(endLetter) {
     let sequence;
-    let topRegex = /^\W|^\d|^a|/i;
+    let topRegex = /^\W|^\d|^a/i;
     if (endLetter !== 'top') {
       sequence = this.getLetterSequence('a', endLetter);
       return RegExp(topRegex.source + sequence, 'i');
@@ -73,7 +73,7 @@ export default class SongListFilter{
         case 'song':
           return songFilter.test(song.name);
         case 'artist':
-          return songFilter.test(song.artistName);
+          return songFilter.test(song.artist);
       }
     });
   }
