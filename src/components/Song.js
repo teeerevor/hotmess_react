@@ -1,8 +1,12 @@
 import React, {PropTypes} from 'react';
-import classNames from 'classnames';
-import InlineSvg  from './InlineSvg';
-import SongAudio  from './SongAudio';
-import PubSub     from 'pubsub-js';
+import classNames         from 'classnames';
+import IconPlus           from './svgs/IconPlus';
+import IconUparrow        from './svgs/IconUparrow';
+import IconPlay           from './svgs/IconPlay';
+import IconTick           from './svgs/IconTick';
+import SongAudio          from './SongAudio';
+import PubSub             from 'pubsub-js';
+import styles             from './song.styl';
 
 class Song extends React.Component {
   constructor(props) {
@@ -59,20 +63,19 @@ class Song extends React.Component {
     const {song, sortBy} = this.props;
 
     let classes = classNames({
-      song: true,
       open,
       shortlisted,
     });
     return (
-      <li className={classes} data-id={this.props.song.id}>
-        <div className="song-display" onClick={this.toggleDisplay}>
+      <li className={styles.song} data-id={this.props.song.id}>
+        <div className={styles.tag} onClick={this.toggleDisplay}>
           {this.arrangeSongInfo(song, sortBy)}
           {this.renderAudio(song, open)}
-          <InlineSvg iconClass={'hover-play'} iconName={'#play'} />
-          <InlineSvg iconClass={'icon-selected'} iconName={'#tick'} />
+          <IconPlay className='icon-play'/>
+          <IconTick className='icon-selected' />
         </div>
-        <button className="circle-button top" onClick={this.shortlistTop} > <InlineSvg iconClass={'icon-top'} iconName={'#arrow-circ'} /> </button>
-        <button className="circle-button add" onClick={this.shortlistAdd} > <InlineSvg iconClass={'icon-plus'} iconName={'#plus-circ'} /> </button>
+        <button className={styles.button} onClick={this.shortlistTop} > <IconUparrow /> </button>
+        <button className={styles.button} onClick={this.shortlistAdd} > <IconPlus /> </button>
       </li>
     );
   }

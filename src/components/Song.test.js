@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { expect }  from 'chai';
 import Song        from './Song';
 import SongAudio   from './SongAudio';
-import InlineSvg   from './InlineSvg';
+import IconTick    from './svgs/IconTick';
 
 function mockItem(overides = {}) {
   let songData = {
@@ -48,7 +48,7 @@ describe('<Song />', () => {
     const item    = mockItem(),
           wrapper = shallow(<Song song = {item} shortlisted = {true} />);
     expect(wrapper.hasClass('shortlisted')).to.be.true;
-    expect(wrapper.contains(<InlineSvg iconClass="icon-selected" iconName="#tick" />)).to.be.true;
+    expect(wrapper.find(IconTick)).to.have.length(1);
   });
 
   it('calls shortlistAdd when a song is added', () => {

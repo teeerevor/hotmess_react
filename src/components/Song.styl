@@ -1,0 +1,86 @@
+@import '../styles/colours'
+@import '../styles/buttons'
+
+$song-padding-hoz= 8px
+$song-padding-vert= 15px
+$song-border-radius= 5px
+$song-bottom-margin= 3px
+
+
+.song
+  display: flex
+  list-style: none
+  margin-bottom: $song-bottom-margin
+
+  &:hover
+    .tag
+      background-color: $dark-grey
+    button
+      svg
+        color: $button-red
+    .icon-play
+      transform: translateX(-30px)
+
+  &.shortlisted
+    .song-display
+      background-color: rgba(199,235,95,0.4)
+    .circle-button
+      opacity: 0
+    .icon-selected
+      display: inline
+    .icon-play
+      opacity: 0
+  &.open
+    .icon-play
+      opacity: 0
+    .song-display
+      background: $song-background
+      padding-bottom: 15px
+
+  .icon-selected,
+  .icon-play
+    width: 14px
+    height: 14px
+    position: absolute
+    transition: transform ease-out 200ms
+    top: 12px
+
+  .icon-play
+    fill: white
+    right: -20px
+
+  .icon-selected
+    right: 10px
+    fill: rgba(199,235,95,1)
+    display: none
+
+.tag
+  cursor: pointer
+  border-radius: 5px
+  background: $song-background
+  flex: 1
+  padding: 10px $song-padding-vert
+  position: relative
+
+.button
+  height: $button-size
+  background: 0
+  border: none
+  cursor: pointer
+  margin-left: 5px
+  padding: 0
+  text-align: center
+  circle-button-colours()
+  svg
+    width: $button-size
+    height: $button-size
+
+.song-audio
+  position: relative
+  padding-top: 15px
+
+
+.big-list
+  .song-display
+    overflow: hidden
+
