@@ -4,7 +4,6 @@ import SongList from '../containers/SongList';
 const Hottest100Page = (props) => {
   return (
     <div>
-      <h1>some text</h1>
       <SongList />
     </div>
   );
