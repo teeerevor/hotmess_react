@@ -1,17 +1,25 @@
 @import 'colours'
 
 $button-grey= #aaa
-$button-red= $tomato-red
+$button-red= tomato
 $button-size= 35px
 $button-size-small= 20px
 
-circle-button-colours()
+.circleButton
+  height: $button-size
+  background: 0
+  border: none
+  cursor: pointer
+  margin-left: 5px
+  padding: 0
+  text-align: center
   border-radius: $button-size
   svg
+    width: $button-size
+    height: $button-size
     fill: white
     color: $button-grey
   &:hover
     svg
       filter: drop-shadow(0 3px 2px rgba(0,0,0,0.2))
       color: $button-red
-

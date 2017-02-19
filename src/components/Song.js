@@ -6,7 +6,8 @@ import IconPlay           from './svgs/IconPlay';
 import IconTick           from './svgs/IconTick';
 import SongAudio          from './SongAudio';
 import PubSub             from 'pubsub-js';
-import styles             from './song.styl';
+import styles             from './Song.styl';
+import btns               from '../styles/buttons.styl';
 
 class Song extends React.Component {
   constructor(props) {
@@ -71,11 +72,11 @@ class Song extends React.Component {
         <div className={styles.tag} onClick={this.toggleDisplay}>
           {this.arrangeSongInfo(song, sortBy)}
           {this.renderAudio(song, open)}
-          <IconPlay className='icon-play'/>
-          <IconTick className='icon-selected' />
+          <IconPlay className={styles.iconPlay} />
+          <IconTick className={styles.iconSelected} />
         </div>
-        <button className={styles.button} onClick={this.shortlistTop} > <IconUparrow /> </button>
-        <button className={styles.button} onClick={this.shortlistAdd} > <IconPlus /> </button>
+        <button className={btns.circleButton} onClick={this.shortlistTop} > <IconUparrow /> </button>
+        <button className={btns.circleButton} onClick={this.shortlistAdd} > <IconPlus /> </button>
       </li>
     );
   }

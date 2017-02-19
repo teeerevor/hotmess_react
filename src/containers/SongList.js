@@ -24,26 +24,26 @@ class SongList  extends React.Component {
     //};
   //}
 
-  componentWillMount() {
-    let songList =  this;
-    /* eslint-disable */
-    this.pubsubNext = PubSub.subscribe('playerNext', function(topic, currentSong) {
-      songList.getNextSong(currentSong);
-    }.bind(this));
-    this.pubsubPrev = PubSub.subscribe('playerPrevious', function(topic, currentSong) {
-      songList.getPreviousSong(currentSong);
-    }.bind(this));
-    this.pubsubRandom = PubSub.subscribe('playerRandom', function(topic) {
-      songList.playRandomSong();
-    }.bind(this));
-    this.pubsubJumpToSong = PubSub.subscribe('jumpToSong', function(topic, song) {
-      songList.jumpToSong(song);
-    }.bind(this));
-    this.pubsubShortlistUpdated = PubSub.subscribe('shortlistUpdated', function(topic, shortlist) {
-      songList.setState({shortlistedSongs: shortlist});
-    }.bind(this));
-    /* eslint-enable */
-  }
+  //componentWillMount() {
+    //let songList =  this;
+    //[> eslint-disable <]
+    //this.pubsubNext = PubSub.subscribe('playerNext', function(topic, currentSong) {
+      //songList.getNextSong(currentSong);
+    //}.bind(this));
+    //this.pubsubPrev = PubSub.subscribe('playerPrevious', function(topic, currentSong) {
+      //songList.getPreviousSong(currentSong);
+    //}.bind(this));
+    //this.pubsubRandom = PubSub.subscribe('playerRandom', function(topic) {
+      //songList.playRandomSong();
+    //}.bind(this));
+    //this.pubsubJumpToSong = PubSub.subscribe('jumpToSong', function(topic, song) {
+      //songList.jumpToSong(song);
+    //}.bind(this));
+    //this.pubsubShortlistUpdated = PubSub.subscribe('shortlistUpdated', function(topic, shortlist) {
+      //songList.setState({shortlistedSongs: shortlist});
+    //}.bind(this));
+    //[> eslint-enable <]
+  //}
 
   componentDidMount() {
     const { dispatch } = this.props
@@ -61,10 +61,10 @@ class SongList  extends React.Component {
   //}
 
 
-  componentWillUnmount() {
-    PubSub.unsubscribe(this.pubsubNext);
-    PubSub.unsubscribe(this.pubsubPrev);
-  }
+  //componentWillUnmount() {
+    //PubSub.unsubscribe(this.pubsubNext);
+    //PubSub.unsubscribe(this.pubsubPrev);
+  //}
 
   getSorterButtonLabel() {
     let sortBtnText = 'Sorted by ';

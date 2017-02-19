@@ -1,5 +1,4 @@
 @import '../styles/colours'
-@import '../styles/buttons'
 
 $song-padding-hoz= 8px
 $song-padding-vert= 15px
@@ -17,44 +16,45 @@ $song-bottom-margin= 3px
       background-color: $dark-grey
     button
       svg
-        color: $button-red
-    .icon-play
+        color: tomato
+    .iconPlay
       transform: translateX(-30px)
 
   &.shortlisted
-    .song-display
+    .tag
       background-color: rgba(199,235,95,0.4)
-    .circle-button
+    .circleButton
       opacity: 0
-    .icon-selected
+    .iconSelected
       display: inline
-    .icon-play
+    .iconPlay
       opacity: 0
   &.open
-    .icon-play
+    .iconPlay
       opacity: 0
-    .song-display
+    .tag
       background: $song-background
       padding-bottom: 15px
 
-  .icon-selected,
-  .icon-play
-    width: 14px
-    height: 14px
-    position: absolute
-    transition: transform ease-out 200ms
-    top: 12px
+.iconSelected,
+.iconPlay
+  width: 14px
+  height: 14px
+  position: absolute
+  transition: transform ease-out 200ms
+  top: 12px
 
-  .icon-play
-    fill: white
-    right: -20px
+.iconPlay
+  fill: white
+  right: -20px
 
-  .icon-selected
-    right: 10px
-    fill: rgba(199,235,95,1)
-    display: none
+.iconSelected
+  right: 10px
+  fill: rgba(199,235,95,1)
+  display: none
 
 .tag
+  overflow: hidden
   cursor: pointer
   border-radius: 5px
   background: $song-background
@@ -62,25 +62,13 @@ $song-bottom-margin= 3px
   padding: 10px $song-padding-vert
   position: relative
 
-.button
-  height: $button-size
-  background: 0
-  border: none
-  cursor: pointer
-  margin-left: 5px
-  padding: 0
-  text-align: center
-  circle-button-colours()
-  svg
-    width: $button-size
-    height: $button-size
 
-.song-audio
+.songAudio
   position: relative
   padding-top: 15px
 
 
-.big-list
-  .song-display
+.bigList
+  .tag
     overflow: hidden
 
