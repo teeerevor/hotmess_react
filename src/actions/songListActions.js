@@ -6,7 +6,7 @@ export const RECEIVE_SONGS = 'RECEIVE_SONGS';
 function requestSongs() {
   return {
     type: REQUEST_SONGS
-  }
+  };
 }
 
 function receiveSongs(json) {
@@ -14,16 +14,16 @@ function receiveSongs(json) {
     type: RECEIVE_SONGS,
     songs: json,
     receivedAt: Date.now()
-  }
+  };
 }
 
-export function fetchSongs(subreddit) {
+export function fetchSongs() {
   return dispatch => {
     dispatch(requestSongs());
 
     let url = 'https://sheetsu.com/apis/v1.0/26abdc6c39f1';
     fetch(url).then(r => r.json())
       .then(data => dispatch(receiveSongs(data)))
-      .catch(e => console.log("Booo"))
-  }
+      .catch(e => console.error(e.toString()));
+  };
 }
