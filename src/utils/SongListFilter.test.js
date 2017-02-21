@@ -9,8 +9,9 @@ describe('SongListFilter', () => {
       expect(filter.getNextLetter('b')).to.equal('c');
     });
 
-    it('should a if give "top"', () => {
-      expect(filter.getNextLetter('top')).to.equal('a');
+    it('should return b if give "top"', () => {
+      // a is included in top
+      expect(filter.getNextLetter('top')).to.equal('b');
     });
 
     it('should return z given z', () => {
@@ -54,7 +55,6 @@ describe('SongListFilter', () => {
     });
 
     it('should return extended range regexs', () => {
-      expect('b').to.match(filter.handleTop('c'));
       expect('c').to.match(filter.handleTop('c'));
       expect('d').to.not.match(filter.handleTop('c'));
     });

@@ -2,7 +2,7 @@ export default class SongListFilter{
   getNextLetter(letter){
     switch (letter) {
       case 'top':
-        return 'a';
+        return 'b';
       case 'z':
         return 'z';
       default:
@@ -39,8 +39,10 @@ export default class SongListFilter{
     let sequence;
     let topRegex = /^\W|^\d|^a/i;
     if (endLetter !== 'top') {
+      //bug where it doubles up the ^a
+      //but dosen't cause errors. TODO fix this
       sequence = this.getLetterSequence('a', endLetter);
-      return RegExp(topRegex.source + sequence, 'i');
+      return RegExp(topRegex.source + '|' + sequence, 'i');
     }
     return topRegex;
   }
