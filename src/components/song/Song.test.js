@@ -9,7 +9,7 @@ function mockItem(overides = {}) {
   let songData = {
       id             : '1',
       name           : 'Doing it to death',
-      artistName     : 'The Kills',
+      artist         : 'The Kills',
       songListLength : 1,
       open           : false,
       sortBy         : 'song'
@@ -28,7 +28,7 @@ describe('<Song />', () => {
     const item = mockItem(),
       wrapper  = shallow(<Song song = {item} />);
     expect(wrapper.text()).to.contain(item.name);
-    expect(wrapper.text()).to.contain(item.artistName);
+    expect(wrapper.text()).to.contain(item.artist);
   });
 
   it('shows songAudio when open', () => {

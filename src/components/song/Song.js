@@ -43,7 +43,7 @@ class Song extends React.Component {
               </span>);
     else
       return (<span className="text">
-                <b>{song.artistName}</b>
+                <b>{song.artist}</b>
                 &nbsp;-&nbsp;
                {song.name}</span>);
   }
