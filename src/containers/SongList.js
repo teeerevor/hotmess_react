@@ -1,9 +1,11 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import PubSub from 'pubsub-js';
-import { fetchSongs } from '../actions/songListActions'
+import * as songListActions from '../actions/songListActions'
 import InlineSvg from '../components/InlineSvg';
 import Song from '../components/song/Song';
+
 
 
 class SongList  extends React.Component {
@@ -22,144 +24,110 @@ class SongList  extends React.Component {
     //};
   //}
 
-  //componentWillMount() {
-    //let songList =  this;
-    //[> eslint-disable <]
-    //this.pubsubNext = PubSub.subscribe('playerNext', function(topic, currentSong) {
-      //songList.getNextSong(currentSong);
-    //}.bind(this));
-    //this.pubsubPrev = PubSub.subscribe('playerPrevious', function(topic, currentSong) {
-      //songList.getPreviousSong(currentSong);
-    //}.bind(this));
-    //this.pubsubRandom = PubSub.subscribe('playerRandom', function(topic) {
-      //songList.playRandomSong();
-    //}.bind(this));
-    //this.pubsubJumpToSong = PubSub.subscribe('jumpToSong', function(topic, song) {
-      //songList.jumpToSong(song);
-    //}.bind(this));
-    //this.pubsubShortlistUpdated = PubSub.subscribe('shortlistUpdated', function(topic, shortlist) {
-      //songList.setState({shortlistedSongs: shortlist});
-    //}.bind(this));
-    //[> eslint-enable <]
-  //}
-
-  componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchSongs());
+  componentWillMount() {
+    this.props.songListActions.fetchSongs();
   }
-
-  //componentWillReceiveProps(nextProps) {
-    //let filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, nextProps.index, nextProps.index);
-    //this.setState({
-      //currentSong: {},
-      //startFilter: nextProps.index,
-      //endFilter: nextProps.index,
-      //songs: filteredSongs
-    //});
-  //}
-
-
-  //componentWillUnmount() {
-    //PubSub.unsubscribe(this.pubsubNext);
-    //PubSub.unsubscribe(this.pubsubPrev);
-  //}
 
   getSorterButtonLabel() {
     let sortBtnText = 'Sorted by ';
     return sortBtnText + this.state.sortBy;
   }
 
-  toggleSortOrder() {
-    let newSortBy, songData, filteredSongs;
-    if( this.state.sortBy == 'song' ) {
-      newSortBy =  'artist';
-      songData  = this.props.artistSongs;
-    } else {
-      newSortBy = 'song';
-      songData  = this.props.songs;
-    }
+  //toggleSortOrder() {
+    //let newSortBy, songData, filteredSongs;
+    //if( this.state.sortBy == 'song' ) {
+      //newSortBy =  'artist';
+      //songData  = this.props.artistSongs;
+    //} else {
+      //newSortBy = 'song';
+      //songData  = this.props.songs;
+    //}
 
-    filteredSongs = filter.filterSongs(songData, newSortBy, 'top', 'top');
-    this.setState({
-      currentSong: {},
-      index:  'top',
-      sortBy: newSortBy,
-      songData: songData,
-      songs: filteredSongs
-    });
+    //filteredSongs = filter.filterSongs(songData, newSortBy, 'top', 'top');
+    //this.setState({
+      //currentSong: {},
+      //index:  'top',
+      //sortBy: newSortBy,
+      //songData: songData,
+      //songs: filteredSongs
+    //});
+  //}
+
+  //showPrevAlphaIndex() {
+    //let newStart      = filter.getPreviousLetter(this.state.startFilter);
+    //let filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, newStart, this.state.startFilter);
+    //this.setState({
+      //startFilter: newStart,
+      //songs: filteredSongs
+    //});
+  //}
+
+  //showNextAlphaIndex() {
+    //let newEnd        = filter.getNextLetter(this.state.endFilter);
+    //let filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, this.state.startFilter, newEnd);
+    //this.setState({
+      //endFilter: newEnd,
+      //songs: filteredSongs
+    //});
+  //}
+
+  //getNextSong(song) {
+    //let nextSong = this.state.songs[song.index + 1];
+    //PubSub.publish('updateCurrentSong', nextSong);
+    //this.setState({currentSong: nextSong});
+  //}
+
+  //getPreviousSong(song) {
+    //let nextSong = this.state.songs[song.index - 1];
+    //PubSub.publish('updateCurrentSong', nextSong);
+    //this.setState({currentSong: nextSong});
+  //}
+
+  //playRandomSong() {
+    //let songNumber = Math.round(Math.random() * this.state.songData.length),
+        //song = this.state.songData[songNumber],
+        //songFirstLetter = song.name.charAt(0),
+        //filterLetter = filter.checkLetter(songFirstLetter),
+        //filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, songFirstLetter, songFirstLetter);
+
+    //this.setState({
+      //currentSong: song,
+      //endFilter: filterLetter,
+      //sortBy: 'song',
+      //startFilter: filterLetter,
+      //songs: filteredSongs
+    //});
+  //}
+
+  //jumpToSong(song) {
+    //let songFirstLetter = song.name.charAt(0),
+        //filterLetter = filter.checkLetter(songFirstLetter),
+        //filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, songFirstLetter, songFirstLetter);
+
+    //this.setState({
+      //currentSong: song,
+      //endFilter: filterLetter,
+      //sortBy: 'song',
+      //startFilter: filterLetter,
+      //songs: filteredSongs
+    //});
+  //}
+
+
+  renderLoading() {
+    return(
+      <div className="emptyState">
+        <h4>
+          WOAH THERE!
+        </h4>
+        <p>
+          We're still loading...
+        </p>
+      </div>
+    );
   }
 
-  showMore() {
-    let newEnd       = filter.getNextLetter(this.state.endFilter),
-        filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, this.state.startFilter, newEnd);
-    this.setState({
-      endFilter: newEnd,
-      songs: filteredSongs
-    });
-  }
-
-  showPrevAlphaIndex() {
-    let newStart      = filter.getPreviousLetter(this.state.startFilter);
-    let filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, newStart, this.state.startFilter);
-    this.setState({
-      startFilter: newStart,
-      songs: filteredSongs
-    });
-  }
-
-  showNextAlphaIndex() {
-    let newEnd        = filter.getNextLetter(this.state.endFilter);
-    let filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, this.state.startFilter, newEnd);
-    this.setState({
-      endFilter: newEnd,
-      songs: filteredSongs
-    });
-  }
-
-  getNextSong(song) {
-    let nextSong = this.state.songs[song.index + 1];
-    PubSub.publish('updateCurrentSong', nextSong);
-    this.setState({currentSong: nextSong});
-  }
-
-  getPreviousSong(song) {
-    let nextSong = this.state.songs[song.index - 1];
-    PubSub.publish('updateCurrentSong', nextSong);
-    this.setState({currentSong: nextSong});
-  }
-
-  playRandomSong() {
-    let songNumber = Math.round(Math.random() * this.state.songData.length),
-        song = this.state.songData[songNumber],
-        songFirstLetter = song.name.charAt(0),
-        filterLetter = filter.checkLetter(songFirstLetter),
-        filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, songFirstLetter, songFirstLetter);
-
-    this.setState({
-      currentSong: song,
-      endFilter: filterLetter,
-      sortBy: 'song',
-      startFilter: filterLetter,
-      songs: filteredSongs
-    });
-  }
-
-  jumpToSong(song) {
-    let songFirstLetter = song.name.charAt(0),
-        filterLetter = filter.checkLetter(songFirstLetter),
-        filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, songFirstLetter, songFirstLetter);
-
-    this.setState({
-      currentSong: song,
-      endFilter: filterLetter,
-      sortBy: 'song',
-      startFilter: filterLetter,
-      songs: filteredSongs
-    });
-  }
-
-
-  renderEmptyState() {
+  renderEmptyState(sortBy) {
     return(
       <div className="emptyState">
         <InlineSvg iconClass={'no-tunes'} iconName={'#no-tunes'} />
@@ -167,30 +135,15 @@ class SongList  extends React.Component {
           WOAH! NO TUNES.
         </h4>
         <p>
-          There are no <b></b> starting with <b></b> in this list.
+          There are no <b>{sortBy}s</b> starting with <b>'{this.state.startFilter.toUpperCase()}'</b> in this list.
         </p>
 
+        <button data-startFilter="{this.state.startFilter}" onClick={this.showPrevAlphaIndex}>BACK UP!</button>
+        <button data-startFilter="{this.state.startFilter}" onClick={this.showNextAlphaIndex}>GO FORTH!</button>
       </div>
     );
   }
-
-  //renderEmptyState() {
-    //return(
-      //<div className="emptyState">
-        //<InlineSvg iconClass={'no-tunes'} iconName={'#no-tunes'} />
-        //<h4>
-          //WOAH! NO TUNES.
-        //</h4>
-        //<p>
-          //There are no <b>{this.state.sortBy}s</b> starting with <b>'{this.state.startFilter.toUpperCase()}'</b> in this list.
-        //</p>
-
-        //<button data-startFilter="{this.state.startFilter}" onClick={this.showPrevAlphaIndex}>BACK UP!</button>
-        //<button data-startFilter="{this.state.startFilter}" onClick={this.showNextAlphaIndex}>GO FORTH!</button>
-      //</div>
-    //);
-  //}
-  renderSongList(songs, sortBy = 'song') {
+  renderSongList(songs, sortBy = 'artist') {
     return(
       <div className="scroller">
         <ul className="big-list list">
@@ -232,16 +185,20 @@ class SongList  extends React.Component {
     //);
   //}
   render() {
-    let {songs} = this.props;
+    let {songs, isFetching, sortBy} = this.props;
     let songBlock;
 
-    if (songs && songs.length > 0) {
+    if (isFetching) {
+      songBlock = this.renderLoading();
+    }else if (songs && songs.length == 0) {
+      songBlock = this.renderEmptyState(sortBy);
+    } else if (songs && songs.length > 0) {
       songBlock = this.renderSongList(songs);
-    } else {
-      songBlock = this.renderEmptyState();
     }
+
     return (
       <div className="song-section">
+        <button onClick={this.props.songListActions.showMoreSongs}>show more</button>
         <nav className="toggle-sort">
         </nav>
         <h3>2016 Song List</h3>
@@ -269,11 +226,17 @@ class SongList  extends React.Component {
 //};
 
 SongList.propTypes = {
-  dispatch    : PropTypes.func.isRequired
+  songs: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    songs: state.songList.songs
+    songs: state.songList.songs,
+    isFetching: state.songList.isFetching
 });
 
-export default connect(mapStateToProps)(SongList);
+const mapDispatchToProps = (dispatch) => ({
+  songListActions: bindActionCreators(songListActions, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongList);
+

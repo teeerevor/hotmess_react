@@ -1,7 +1,6 @@
 //import * as types from '../constants/actionTypes';
+import {REQUEST_SONGS, RECEIVE_SONGS, SHOW_MORE_SONGS} from '../constants/actionTypes';
 
-export const REQUEST_SONGS = 'REQUEST_SONGS';
-export const RECEIVE_SONGS = 'RECEIVE_SONGS';
 
 function requestSongs() {
   return {
@@ -17,13 +16,23 @@ function receiveSongs(data) {
   };
 }
 
-export function fetchSongs() {
-  return dispatch => {
+export const fetchSongs = () => (dispatch) =>  {
     dispatch(requestSongs());
 
     let url = 'https://sheetsu.com/apis/v1.0/26abdc6c39f1';
     fetch(url).then(r => r.json())
       .then(data => dispatch(receiveSongs(data)))
       .catch(e => console.error(e.toString()));
-  };
+}
+
+export const showMoreSongs = () => (dispatch) => {
+  dispatch({
+      type: SHOW_MORE_SONGS,
+  });
+}
+
+export function changeListSort() {
+  dispatch({
+      type: CHANGE_SONG_SORT,
+  });
 }

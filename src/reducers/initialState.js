@@ -4,6 +4,9 @@ export default {
   songList: {
     isFetching: false,
     error: null,
-    songs: []
+    songs: [],
+    sortBy: 'artist',
+    filterStart: 'top',
+    filterEnd: 'top',
   }
 };

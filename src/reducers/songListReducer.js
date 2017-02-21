@@ -1,28 +1,36 @@
-import {REQUEST_SONGS, RECEIVE_SONGS} from '../constants/actionTypes';
-import objectAssign from 'object-assign';
+import {REQUEST_SONGS, RECEIVE_SONGS, SHOW_MORE_SONGS} from '../constants/actionTypes';
 import initialState from './initialState';
 import SongListFilter from '../utils/SongListFilter';
 
 export default function songListReducer(state = initialState.songList, action) {
   let filter = new SongListFilter();
+  let songs;
 
   switch (action.type) {
     case REQUEST_SONGS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true,
-        didInvalidate: false
-      });
+        didInvalidate: false,
+      };
 
     case RECEIVE_SONGS:
-      console.log('songData='+action.songData.length);
-      let songs = filter.filterSongs(action.songData, 'artist', 'top', 'top');
-      console.log('songs='+songs.length);
-      return Object.assign({}, state, {
+      songs = filter.filterSongs(action.songData, state.sortBy, state.filterStart, state.filterEnd);
+      return {
+        ...state,
         isFetching: false,
         songs,
         songData: action.songData,
-      })
-      return state;
+      };
+
+    case SHOW_MORE_SONGS:
+      let nextEnd = filter.getNextLetter(state.filterEnd);
+      songs = filter.filterSongs(state.songData, state.sortBy, state.filterStart, nextEnd);
+      return {
+        ...state,
+        songs,
+        filterEnd: nextEnd,
+      };
 
     default:
       return state;
