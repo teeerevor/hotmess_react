@@ -143,15 +143,15 @@ class SongList  extends React.Component {
       </div>
     );
   }
+
+            //let openSong = this.state.currentSong.id === song.id;
+            //let shortlisted = this.state.shortlistedSongs.includes(song.id);
   renderSongList(songs, sortBy = 'artist') {
     return(
       <div className="scroller">
         <ul className="big-list list">
           {songs.map((song, i) => {
-            song.index = i;
-            //let openSong = this.state.currentSong.id === song.id;
             let openSong = false;
-            //let shortlisted = this.state.shortlistedSongs.includes(song.id);
             let shortlisted = false;
             return (<Song key={song.id}
                          song={song}
