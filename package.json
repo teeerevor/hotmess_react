@@ -91,7 +91,6 @@
     "sass-loader": "4.1.0",
     "sinon": "^1.17.7",
     "style-loader": "0.13.1",
-    "stylus-loader": "2.5.0",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
     "webpack-bundle-analyzer": "2.1.1",
