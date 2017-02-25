@@ -1,5 +1,9 @@
 //import * as types from '../constants/actionTypes';
-import {REQUEST_SONGS, RECEIVE_SONGS, SHOW_MORE_SONGS} from '../constants/actionTypes';
+import {
+  REQUEST_SONGS,
+  RECEIVE_SONGS,
+  SHOW_MORE_SONGS,
+} from '../constants/actionTypes';
 
 
 function requestSongs() {

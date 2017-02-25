@@ -1,31 +1,15 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import PubSub from 'pubsub-js';
-import * as songListActions from '../actions/songListActions'
+import * as actions from '../actions/songListActions'
 import InlineSvg from '../components/InlineSvg';
 import Song from '../components/song/Song';
 
 
 
 class SongList  extends React.Component {
-  //getInitialState() {
-    //console.log('init');
-    //let sortBy = 'song';
-    ////let filteredSongs = filter.filterSongs(this.props.songs, sortBy, this.props.index, this.props.index);
-    //return {
-      //sortBy:      sortBy,
-      //startFilter: this.props.index,
-      //endFilter:   this.props.index,
-      //currentSong: {id: -1},
-      //songData: this.props.songs,
-      //songs: [],
-      //shortlistedSongs: []
-    //};
-  //}
-
   componentWillMount() {
-    this.props.songListActions.fetchSongs();
+    this.props.fetchSongs();
   }
 
   getSorterButtonLabel() {
@@ -135,11 +119,11 @@ class SongList  extends React.Component {
           WOAH! NO TUNES.
         </h4>
         <p>
-          There are no <b>{sortBy}s</b> starting with <b>'{this.state.startFilter.toUpperCase()}'</b> in this list.
+          There are no <b>{sortBy}s</b> starting with <b>{this.props.filterStart.toUpperCase()}</b> in this list.
         </p>
 
-        <button data-startFilter="{this.state.startFilter}" onClick={this.showPrevAlphaIndex}>BACK UP!</button>
-        <button data-startFilter="{this.state.startFilter}" onClick={this.showNextAlphaIndex}>GO FORTH!</button>
+        <button onClick={this.showPrevAlphaIndex}>BACK UP!</button>
+        <button onClick={this.showNextAlphaIndex}>GO FORTH!</button>
       </div>
     );
   }
@@ -198,7 +182,7 @@ class SongList  extends React.Component {
 
     return (
       <div className="song-section">
-        <button onClick={this.props.songListActions.showMoreSongs}>show more</button>
+        <button onClick={this.props.showMoreSongs.bind(this)}>show more</button>
         <nav className="toggle-sort">
         </nav>
         <h3>2016 Song List</h3>
@@ -225,18 +209,19 @@ class SongList  extends React.Component {
   //this.setState({includeWaypoint: false});
 //};
 
-SongList.propTypes = {
-  songs: PropTypes.array.isRequired
-};
+//SongList.propTypes = {
+  //songs: PropTypes.array.isRequired
+//};
 
 const mapStateToProps = (state) => ({
     songs: state.songList.songs,
-    isFetching: state.songList.isFetching
+    isFetching: state.songList.isFetching,
+    filterStart: state.songList.filterStart,
+    filterEnd: state.songList.filterEnd,
+    sortBy: state.songList.sortBy,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  songListActions: bindActionCreators(songListActions, dispatch),
-});
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongList);
 

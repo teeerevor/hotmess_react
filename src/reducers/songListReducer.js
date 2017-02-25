@@ -1,8 +1,22 @@
-import {REQUEST_SONGS, RECEIVE_SONGS, SHOW_MORE_SONGS} from '../constants/actionTypes';
-import initialState from './initialState';
 import SongListFilter from '../utils/SongListFilter';
+import {
+  REQUEST_SONGS,
+  RECEIVE_SONGS,
+  SHOW_MORE_SONGS
+} from '../constants/actionTypes';
 
-export default function songListReducer(state = initialState.songList, action) {
+export default function songListReducer(
+  state = {
+    isFetching: false,
+    error: null,
+    songs: [],
+    sortBy: 'artist',
+    filterStart: 'top',
+    filterEnd: 'top',
+  },
+  action,
+) {
+
   let filter = new SongListFilter();
   let songs;
 
