@@ -4,7 +4,10 @@ import {
   FETCH_SONGS_SUCCESS,
   FETCH_SONGS_ERROR,
   SHOW_MORE_SONGS,
+  TOGGLE_SONG_ORDERING,
 } from '../constants/actionTypes';
+
+import _ from 'lodash';
 
 export default function songListReducer(
   state = {
@@ -30,7 +33,6 @@ export default function songListReducer(
       };
 
     case FETCH_SONGS_SUCCESS:
-      console.log(action.songData.length);
       songs = filter.filterSongs(action.songData, state.sortBy, state.filterStart, state.filterEnd);
       return {
         ...state,
@@ -46,6 +48,24 @@ export default function songListReducer(
         ...state,
         songs,
         filterEnd: nextEnd,
+      };
+
+    case TOGGLE_SONG_ORDERING:
+      let {songData, sortBy} = state;
+      if (sortBy == 'song'){
+        sortBy = 'artist'
+        songData = _.sortBy(songData, ['artist', 'name']);
+      } else {
+        sortBy = 'song'
+        songData = _.sortBy(songData, ['name', 'artist']);
+      }
+
+      songs = filter.filterSongs(songData, sortBy, state.filterStart, state.filterEnd);
+      return {
+        ...state,
+        songs,
+        songData,
+        sortBy,
       };
 
     default:

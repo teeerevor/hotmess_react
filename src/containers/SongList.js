@@ -12,31 +12,6 @@ class SongList  extends React.Component {
     this.props.fetchSongsIfRequired();
   }
 
-  getSorterButtonLabel() {
-    let sortBtnText = 'Sorted by ';
-    return sortBtnText + this.state.sortBy;
-  }
-
-  //toggleSortOrder() {
-    //let newSortBy, songData, filteredSongs;
-    //if( this.state.sortBy == 'song' ) {
-      //newSortBy =  'artist';
-      //songData  = this.props.artistSongs;
-    //} else {
-      //newSortBy = 'song';
-      //songData  = this.props.songs;
-    //}
-
-    //filteredSongs = filter.filterSongs(songData, newSortBy, 'top', 'top');
-    //this.setState({
-      //currentSong: {},
-      //index:  'top',
-      //sortBy: newSortBy,
-      //songData: songData,
-      //songs: filteredSongs
-    //});
-  //}
-
   //showPrevAlphaIndex() {
     //let newStart      = filter.getPreviousLetter(this.state.startFilter);
     //let filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, newStart, this.state.startFilter);
@@ -158,13 +133,15 @@ class SongList  extends React.Component {
     }else if (songs && songs.length == 0) {
       songBlock = this.renderEmptyState(sortBy);
     } else if (songs && songs.length > 0) {
-      songBlock = this.renderSongList(songs);
+      songBlock = this.renderSongList(songs, sortBy);
     }
 
+    let sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS"
     return (
       <div className="song-section">
         <button onClick={ this.props.showMoreSongs }>show more</button>
         <nav className="toggle-sort">
+          <a onClick={ this.props.toggleSortOrder }>{ sortLabel }</a>
         </nav>
         <h3>2016 Song List</h3>
         { songBlock }

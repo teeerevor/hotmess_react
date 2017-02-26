@@ -7,9 +7,8 @@ import {
   TOGGLE_SONG_ORDERING,
 } from '../constants/actionTypes';
 
-
 export const fetchSongsIfRequired = () => (dispatch) =>  {
-  let songData = localStorage.getItem('2016');
+  const songData = localStorage.getItem('2016');
   if( songData ) {
     const songs = JSON.parse(songData);
     return dispatch(receiveSongs( songs ));
@@ -21,7 +20,7 @@ export const fetchSongsIfRequired = () => (dispatch) =>  {
 const fetchSongs = (dispatch)  =>  {
     dispatch(fetchSongsStart());
 
-    let url = 'https://sheetsu.com/apis/v1.0/26abdc6c39f1';
+    const url = 'https://sheetsu.com/apis/v1.0/26abdc6c39f1';
     fetch(url).then(r => r.json())
       .then(data => dispatch(receiveSongs(data, true)))
       .catch(e => console.error(e.toString()));
@@ -45,7 +44,7 @@ const receiveSongs = (songData, newData=false) => {
 }
 
 const storeSongs = (songData) => {
-  let dataStr = JSON.stringify(songData);
+  const dataStr = JSON.stringify(songData);
   localStorage.setItem("2016", dataStr);
   localStorage.setItem("2016_fetched", Date.now());
 }
@@ -56,8 +55,8 @@ export const showMoreSongs = () => (dispatch) => {
   });
 }
 
-export function changeListSort() {
+export const toggleSortOrder = () => (dispatch) => {
   dispatch({
-      type: CHANGE_SONG_SORT,
+      type: TOGGLE_SONG_ORDERING,
   });
 }
