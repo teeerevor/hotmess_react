@@ -69,7 +69,9 @@ export default class SongListFilter{
   }
 
   filterSongs(songs, filterBy, startsWith, endsWith){
-    let songFilter = this.getSongFilter(startsWith, endsWith);
+    const start = startsWith.toLowerCase();
+    const end = endsWith.toLowerCase();
+    let songFilter = this.getSongFilter(start, end);
     return songs.filter(song => {
       switch (filterBy) {
         case 'song':

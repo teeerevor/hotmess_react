@@ -5,6 +5,7 @@ import {
   FETCH_SONGS_ERROR,
   SHOW_MORE_SONGS,
   TOGGLE_SONG_ORDERING,
+  SHOW_SONGS_STARTING_WITH,
 } from '../constants/actionTypes';
 
 import _ from 'lodash';
@@ -66,6 +67,16 @@ export default function songListReducer(
         songs,
         songData,
         sortBy,
+      };
+
+    case SHOW_SONGS_STARTING_WITH:
+      console.log(action.index);
+      songs = filter.filterSongs(state.songData, state.sortBy, action.index, action.index);
+      return {
+        ...state,
+        songs,
+        filterStart: action.index,
+        filterEnd: action.index,
       };
 
     default:

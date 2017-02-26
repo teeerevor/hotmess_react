@@ -1,10 +1,10 @@
-//import * as types from '../constants/actionTypes';
 import {
   FETCH_SONGS_START,
   FETCH_SONGS_SUCCESS,
   FETCH_SONGS_ERROR,
   SHOW_MORE_SONGS,
   TOGGLE_SONG_ORDERING,
+  SHOW_SONGS_STARTING_WITH,
 } from '../constants/actionTypes';
 
 export const fetchSongsIfRequired = () => (dispatch) =>  {
@@ -58,5 +58,12 @@ export const showMoreSongs = () => (dispatch) => {
 export const toggleSortOrder = () => (dispatch) => {
   dispatch({
       type: TOGGLE_SONG_ORDERING,
+  });
+}
+
+export const showSongAtIndex = (index) => (dispatch) => {
+  dispatch({
+      type: SHOW_SONGS_STARTING_WITH,
+      index: index,
   });
 }
