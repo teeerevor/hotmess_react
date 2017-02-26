@@ -148,26 +148,7 @@ class SongList  extends React.Component {
     );
   }
 
-  //render() {
-    //let {songs} = this.props;
-    //let songBlock;
-
-    //if (songs && songs.length > 0) {
-      //songBlock = this.renderSongList(songs);
-    //} else {
-      //songBlock = this.renderEmptyState();
-    //}
-    //return (
-      //<div className="song-section">
-        //<nav className="toggle-sort">
-          //<a onClick={this.toggleSortOrder}>{this.getSorterButtonLabel()}</a>
-        //</nav>
-        ////<h3>{window.hotmess100.year} Song List</h3>
-        //<h3>2016 Song List</h3>
-        //{ songBlock }
-      //</div>
-    //);
-  //}
+      //<h3>{window.hotmess100.year} Song List</h3>
   render() {
     let {songs, isFetching, sortBy} = this.props;
     let songBlock;
