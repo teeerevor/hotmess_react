@@ -1,8 +1,9 @@
 import SongListFilter from '../utils/SongListFilter';
 import {
-  REQUEST_SONGS,
-  RECEIVE_SONGS,
-  SHOW_MORE_SONGS
+  FETCH_SONGS_START,
+  FETCH_SONGS_SUCCESS,
+  FETCH_SONGS_ERROR,
+  SHOW_MORE_SONGS,
 } from '../constants/actionTypes';
 
 export default function songListReducer(
@@ -21,14 +22,15 @@ export default function songListReducer(
   let songs;
 
   switch (action.type) {
-    case REQUEST_SONGS:
+    case FETCH_SONGS_START:
       return {
         ...state,
         isFetching: true,
         didInvalidate: false,
       };
 
-    case RECEIVE_SONGS:
+    case FETCH_SONGS_SUCCESS:
+      console.log(action.songData.length);
       songs = filter.filterSongs(action.songData, state.sortBy, state.filterStart, state.filterEnd);
       return {
         ...state,

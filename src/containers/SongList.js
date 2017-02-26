@@ -9,7 +9,7 @@ import Song from '../components/song/Song';
 
 class SongList  extends React.Component {
   componentWillMount() {
-    this.props.fetchSongs();
+    this.props.fetchSongsIfRequired();
   }
 
   getSorterButtonLabel() {
@@ -182,7 +182,7 @@ class SongList  extends React.Component {
 
     return (
       <div className="song-section">
-        <button onClick={this.props.showMoreSongs.bind(this)}>show more</button>
+        <button onClick={ this.props.showMoreSongs }>show more</button>
         <nav className="toggle-sort">
         </nav>
         <h3>2016 Song List</h3>
