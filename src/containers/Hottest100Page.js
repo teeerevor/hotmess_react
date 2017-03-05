@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import SongList from './SongList';
+import SongList from './SongList/index';
 import IndexList from '../components/indexList/IndexList';
 
 const Hottest100Page = (props) => {

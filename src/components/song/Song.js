@@ -28,10 +28,6 @@ class Song extends React.Component {
       return <SongAudio song={song} />;
   }
 
-  toggleDisplay = () => {
-    this.state.open ? this.setState({open: false}) : this.setState({open: true});
-  }
-
   arrangeSongInfo(song, sortBy) {
     if(sortBy === 'song')
       return (<span className="text">
@@ -59,19 +55,18 @@ class Song extends React.Component {
   }
 
   render() {
-    const {open, shortlisted} = this.state;
-    const {song, sortBy} = this.props;
+    const {song, sortBy, shortlisted, isOpen} = this.props;
 
     let className = styles.song;
-    if (open) className = styles.open;
+    if (isOpen) className = styles.open;
     if (shortlisted) className = styles.shortlisted;
-    if (open && shortlisted) className = styles.openAndShortlisted;
+    if (isOpen && shortlisted) className = styles.openAndShortlisted;
 
     return (
       <li className={className} data-id={this.props.song.id}>
-        <div className={styles.tag} onClick={this.toggleDisplay}>
+        <div className={styles.tag} onClick={() => this.props.onToggleSongView()}>
           {this.arrangeSongInfo(song, sortBy)}
-          {this.renderAudio(song, open)}
+          {this.renderAudio(song, song.open)}
           <IconPlay className={styles.iconPlay} />
           <IconTick className={styles.iconSelected} />
         </div>

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import hottest100 from './hottest100Reducer';
-import songList from './songListReducer';
 import {routerReducer} from 'react-router-redux';
+import hottest100 from './hottest100Reducer';
+import songList from '../containers/SongList/reducer';
 
 const rootReducer = combineReducers({
   hottest100,
@@ -10,3 +10,5 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+
+

@@ -3,9 +3,10 @@ import {
   FETCH_SONGS_SUCCESS,
   FETCH_SONGS_ERROR,
   SHOW_MORE_SONGS,
-  TOGGLE_SONG_ORDERING,
   SHOW_SONGS_STARTING_WITH,
-} from '../constants/actionTypes';
+  TOGGLE_SONG_ORDERING,
+  TOGGLE_SONG_VIEW,
+} from './types';
 
 export const fetchSongsIfRequired = () => (dispatch) =>  {
   const songData = localStorage.getItem('2016');
@@ -65,5 +66,12 @@ export const showSongAtIndex = (index) => (dispatch) => {
   dispatch({
       type: SHOW_SONGS_STARTING_WITH,
       index: index,
+  });
+}
+
+export const toggleSongView = (songId) => (dispatch) => {
+  dispatch({
+      type: TOGGLE_SONG_VIEW,
+      songId,
   });
 }

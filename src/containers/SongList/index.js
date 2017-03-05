@@ -1,11 +1,10 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/songListActions'
-import InlineSvg from '../components/InlineSvg';
-import Song from '../components/song/Song';
-
-
+import * as actions from './actions'
+import InlineSvg from '../../components/InlineSvg';
+import Song from '../../components/song/Song';
+import _ from 'lodash';
 
 class SongList  extends React.Component {
   componentWillMount() {
@@ -103,20 +102,28 @@ class SongList  extends React.Component {
     );
   }
 
-            //let openSong = this.state.currentSong.id === song.id;
             //let shortlisted = this.state.shortlistedSongs.includes(song.id);
-  renderSongList(songs, sortBy = 'artist') {
+                          //onShortlist={this.onShortlist}
+                          //onShortlistTop={this.onShortlistTop}
+  renderSongList(songs, sortBy, openSongs) {
     return(
       <div className="scroller">
         <ul className="big-list list">
           {songs.map((song, i) => {
-            let openSong = false;
             let shortlisted = false;
-            return (<Song key={song.id}
-                         song={song}
-                         open={openSong}
-                         shortlisted={shortlisted}
-                         sortBy={sortBy}/>);
+            let open = _.indexOf(openSongs, song.id) >= 0
+            return (
+              <Song key={song.id}
+                    song={song}
+                    isOpen={open}
+                    shortlisted={shortlisted}
+                    sortBy={sortBy}
+                    onToggleSongView={this.props.toggleSongView.bind(
+                                      this,
+                                      song.id,
+                                      )}
+              />
+            );
           })}
         </ul>
       </div>
@@ -125,7 +132,7 @@ class SongList  extends React.Component {
 
       //<h3>{window.hotmess100.year} Song List</h3>
   render() {
-    let {songs, isFetching, sortBy} = this.props;
+    let {songs, isFetching, sortBy, openSongs} = this.props;
     let songBlock;
 
     if (isFetching) {
@@ -133,7 +140,7 @@ class SongList  extends React.Component {
     }else if (songs && songs.length == 0) {
       songBlock = this.renderEmptyState(sortBy);
     } else if (songs && songs.length > 0) {
-      songBlock = this.renderSongList(songs, sortBy);
+      songBlock = this.renderSongList(songs, sortBy, openSongs);
     }
 
     let sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS"
@@ -177,6 +184,7 @@ const mapStateToProps = (state) => ({
     filterStart: state.songList.filterStart,
     filterEnd: state.songList.filterEnd,
     sortBy: state.songList.sortBy,
+    openSongs: state.songList.openSongs,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
