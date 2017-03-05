@@ -9,16 +9,6 @@ import styles             from './Song.styl';
 import btns               from '../../styles/buttons.styl';
 
 class Song extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: props.open || false,
-      shortlisted: props.shortlisted || false,
-      sortBy: props.sortBy || 'song'
-    };
-  }
-
-
   componentWillReceiveProps(nextProps) {
     this.setState({open: nextProps.open});
   }
@@ -80,8 +70,9 @@ class Song extends React.Component {
 Song.propTypes = {
   song: PropTypes.object.isRequired,
   sortBy: PropTypes.string,
-  open: PropTypes.bool,
+  isOpen: PropTypes.bool,
   shortlisted: PropTypes.bool,
+  onToggleSongView: PropTypes.func,
 };
 
 export default Song;
