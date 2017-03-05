@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../containers/SongList/actions'
-import * as styles from './IndexList.styl'
+import * as actions from '../../containers/SongList/actions';
+import * as styles from './IndexList.styl';
 
 class IndexList  extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class IndexList  extends React.Component {
         <button
           key={item}
           onClick={this.changeIndex.bind(this, item)}
-          className={ active === item ? styles.active : styles.index }
+          className={active === item ? styles.active : styles.index}
         > {item}
         </button>
       )}
@@ -36,8 +36,11 @@ class IndexList  extends React.Component {
   }
 }
 
-const mapStateToProps = () =>  {return {}}
+IndexList.propTypes = {
+  showSongAtIndex: PropTypes.func,
+};
+
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
-export default connect( mapStateToProps, mapDispatchToProps )(IndexList);
+export default connect( {}, mapDispatchToProps )(IndexList);

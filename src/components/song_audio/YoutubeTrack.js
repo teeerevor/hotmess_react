@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 //import FlexiFrame from './FlexiFrame';
-import PubSub   from 'pubsub-js';
+//import PubSub   from 'pubsub-js';
 
 export default class YoutubeTrack extends React.Component {
   //componentWillMount() {
