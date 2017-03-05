@@ -10,6 +10,8 @@
     This is an example of how to add features to index.html for only one environment.
     To track JavaScript errors via TrackJS, sign up for a free trial at TrackJS.com and enter your token in /webpack.config.prod.js on line 55.
    -->
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+
   <% if (htmlWebpackPlugin.options.trackJSToken) { %>
   <script>window._trackJs = {token: '<%= htmlWebpackPlugin.options.trackJSToken %>'};</script>
   <script src="https://d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js"></script>
@@ -20,6 +22,13 @@
   <title>Hottest100.io</title>
 </head>
 <body>
-<div id="app"></div>
+  <div id="app"></div>
+  <script>
+    //load youtube vid api
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  </script>
 </body>
 </html>

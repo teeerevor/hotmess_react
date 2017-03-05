@@ -20,6 +20,7 @@ $song-bottom-margin= 3px
     .iconPlay
       transform: translateX(-30px)
 
+
 .shortlisted
   @extend .song
   .circleButton
@@ -49,7 +50,6 @@ $song-bottom-margin= 3px
     background: $song-background
     padding-bottom: 15px
 
-
 .iconSelected,
 .iconPlay
   width: 14px
@@ -78,8 +78,18 @@ $song-bottom-margin= 3px
 
 
 .songAudio
+  height: 0
+  padding-bottom: 56.25%
+  margin-top: 15px
   position: relative
-  padding-top: 15px
+  width: 100%
+
+  iframe
+    height: 100%
+    left: 0
+    position: absolute
+    top: 0
+    width: 100%
 
 
 .bigList

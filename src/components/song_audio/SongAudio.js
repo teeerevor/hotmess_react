@@ -4,8 +4,8 @@ import YoutubeTrack from './YoutubeTrack';
 
 class SongAudio extends React.Component {
   hasAudio(song){
-    if(song.youtube_url) return "youtube";
-    if(song.soundclound_url) return "soundclound";
+    if(song.youtube_key) return "youtube";
+    if(song.soundclound_key) return "soundclound";
     return "JJJ";
   }
 

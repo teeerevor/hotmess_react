@@ -25,12 +25,12 @@ class Song extends React.Component {
 
   renderAudio = (song, open) => {
     if( open )
-      return <SongAudio song={song} />;
+      return (<div className={styles.songAudio}><SongAudio song={song} /></div>);
   }
 
   arrangeSongInfo(song, sortBy) {
     if(sortBy === 'song')
-      return (<span className="text">
+      return (<span className={styles.text}>
                 <b>
                   {song.name}
                 </b>
@@ -38,7 +38,7 @@ class Song extends React.Component {
                 {song.artist}
               </span>);
     else
-      return (<span className="text">
+      return (<span className={styles.text}>
                 <b>{song.artist}</b>
                 &nbsp;-&nbsp;
                {song.name}</span>);
@@ -66,7 +66,7 @@ class Song extends React.Component {
       <li className={className} data-id={this.props.song.id}>
         <div className={styles.tag} onClick={() => this.props.onToggleSongView()}>
           {this.arrangeSongInfo(song, sortBy)}
-          {this.renderAudio(song, song.open)}
+          {this.renderAudio(song, isOpen)}
           <IconPlay className={styles.iconPlay} />
           <IconTick className={styles.iconSelected} />
         </div>
