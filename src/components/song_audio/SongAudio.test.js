@@ -7,12 +7,12 @@ import YoutubeTrack from './YoutubeTrack';
 
 describe('<SongAudio />', () => {
   describe('hasAudio()', () => {
-    let songWithYoutubeUrl = {youtube_url: 'youtubecode'};
+    let songWithYoutubeUrl = {youtube_key: 'youtubecode'};
     //let songWithSoundcloudUrl = {soundcloud_url: 'soundcloudcode'};
     let songWithJJJ = {jjj_preview: 'jjjurl'};
-    let songWithAll = { youtube_url    : 'youtubecode',
+    let songWithAll = { youtube_key    : 'youtubecode',
                         jjj_preview    : 'jjjurl',
-                        soundcloud_url : 'soundcloudcode'};
+                        soundcloud_key : 'soundcloudcode'};
 
     it('returns youtube track', () => {
       let wrapper = shallow(<SongAudio song={songWithYoutubeUrl} />);
