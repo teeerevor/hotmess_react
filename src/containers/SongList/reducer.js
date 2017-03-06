@@ -3,7 +3,6 @@ import SongListFilter from '../../utils/SongListFilter';
 import {
   FETCH_SONGS_START,
   FETCH_SONGS_SUCCESS,
-  FETCH_SONGS_ERROR,
   SHOW_MORE_SONGS,
   SHOW_SONGS_STARTING_WITH,
   TOGGLE_SONG_ORDERING,
@@ -45,7 +44,7 @@ export default function songListReducer(
         songData: action.songData,
       };
 
-    case SHOW_MORE_SONGS:
+    case SHOW_MORE_SONGS: {
       let nextEnd = filter.getNextLetter(state.filterEnd);
       songs = filter.filterSongs(state.songData, state.sortBy, state.filterStart, nextEnd);
       return {
@@ -53,6 +52,7 @@ export default function songListReducer(
         songs,
         filterEnd: nextEnd,
       };
+    }
 
     case SHOW_SONGS_STARTING_WITH:
       songs = filter.filterSongs(state.songData, state.sortBy, action.index, action.index);
@@ -63,13 +63,13 @@ export default function songListReducer(
         filterEnd: action.index,
       };
 
-    case TOGGLE_SONG_ORDERING:
+    case TOGGLE_SONG_ORDERING: {
       let {songData, sortBy} = state;
       if (sortBy == 'song'){
-        sortBy = 'artist'
+        sortBy = 'artist';
         songData = _.sortBy(songData, ['artist', 'name']);
       } else {
-        sortBy = 'song'
+        sortBy = 'song';
         songData = _.sortBy(songData, ['name', 'artist']);
       }
 
@@ -81,9 +81,11 @@ export default function songListReducer(
         sortBy,
       };
 
-    case TOGGLE_SONG_VIEW:
+    }
+
+    case TOGGLE_SONG_VIEW:{
       let openSongs;
-      let songIsOpen = _.indexOf(state.openSongs, action.songId) >= 0
+      let songIsOpen = _.indexOf(state.openSongs, action.songId) >= 0;
       if( songIsOpen )
         openSongs = _.without(state.openSongs, action.songId);
       else
@@ -94,6 +96,7 @@ export default function songListReducer(
         openSongs,
       };
 
+    }
     default:
       return state;
   }

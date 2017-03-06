@@ -1,5 +1,4 @@
 //import {SAVE_FUEL_SAVINGS, CALCULATE_FUEL_SAVINGS} from '../constants/actionTypes';
-import objectAssign from 'object-assign';
 import initialState from './initialState';
 
 // IMPORTANT: Note that with Redux, state should NEVER be changed.

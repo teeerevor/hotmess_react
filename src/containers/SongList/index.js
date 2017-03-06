@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from './actions'
+import * as actions from './actions';
 import InlineSvg from '../../components/InlineSvg';
 import Song from '../../components/song/Song';
 import _ from 'lodash';
@@ -111,7 +111,7 @@ class SongList  extends React.Component {
         <ul className="big-list list">
           {songs.map((song, i) => {
             let shortlisted = false;
-            let open = _.indexOf(openSongs, song.id) >= 0
+            let open = _.indexOf(openSongs, song.id) !== -1;
             return (
               <Song key={song.id}
                     song={song}
@@ -143,15 +143,15 @@ class SongList  extends React.Component {
       songBlock = this.renderSongList(songs, sortBy, openSongs);
     }
 
-    let sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS"
+    let sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS";
     return (
       <div className="song-section">
-        <button onClick={ this.props.showMoreSongs }>show more</button>
+        <button onClick={this.props.showMoreSongs}>show more</button>
         <nav className="toggle-sort">
-          <a onClick={ this.props.toggleSortOrder }>{ sortLabel }</a>
+          <a onClick={this.props.toggleSortOrder}>{sortLabel}</a>
         </nav>
         <h3>2016 Song List</h3>
-        { songBlock }
+        {songBlock}
       </div>
     );
   }
@@ -174,9 +174,18 @@ class SongList  extends React.Component {
   //this.setState({includeWaypoint: false});
 //};
 
-//SongList.propTypes = {
-  //songs: PropTypes.array.isRequired
-//};
+SongList.propTypes = {
+  songs: PropTypes.array,
+  isFetching: PropTypes.bool,
+  filterStart: PropTypes.bool,
+  filterEnd: PropTypes.bool,
+  sortBy: PropTypes.bool,
+  openSongs: PropTypes.array,
+  fetchSongsIfRequired: PropTypes.func,
+  toggleSongView: PropTypes.func,
+  toggleSortOrder: PropTypes.func,
+  showMoreSongs: PropTypes.func,
+};
 
 const mapStateToProps = (state) => ({
     songs: state.songList.songs,
