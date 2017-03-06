@@ -7,6 +7,9 @@ import {
   SHOW_SONGS_STARTING_WITH,
   TOGGLE_SONG_ORDERING,
   TOGGLE_SONG_VIEW,
+  SHORTLIST_SONG_TOP,
+  SHORTLIST_SONG,
+  DELIST_SONG,
 } from './types';
 
 
@@ -16,7 +19,7 @@ export default function songListReducer(
     error: null,
     songs: [],
     openSongs: [],
-    shortlistedSongs: [],
+    shortlist: [],
     sortBy: 'artist',
     filterStart: 'top',
     filterEnd: 'top',
@@ -96,6 +99,33 @@ export default function songListReducer(
         openSongs,
       };
 
+    }
+
+    case SHORTLIST_SONG:{
+      const shortlist = _.concat(state.shorlist, action.songId);
+
+      return {
+        ...state,
+        shortlist,
+      };
+    }
+
+    case SHORTLIST_SONG_TOP:{
+      const shortlist = _.concat([action.songId], state.shorlist);
+
+      return {
+        ...state,
+        shortlist,
+      };
+    }
+
+    case DELIST_SONG:{
+      const shortlist = _.without(state.shorlist, action.songId);
+
+      return {
+        ...state,
+        shortlist,
+      };
     }
     default:
       return state;

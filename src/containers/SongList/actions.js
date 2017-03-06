@@ -5,6 +5,9 @@ import {
   SHOW_SONGS_STARTING_WITH,
   TOGGLE_SONG_ORDERING,
   TOGGLE_SONG_VIEW,
+  SHORTLIST_SONG_TOP,
+  SHORTLIST_SONG,
+  DELIST_SONG,
 } from './types';
 
 export const fetchSongsIfRequired = () => (dispatch) =>  {
@@ -71,6 +74,29 @@ export const showSongAtIndex = (index) => (dispatch) => {
 export const toggleSongView = (songId) => (dispatch) => {
   dispatch({
       type: TOGGLE_SONG_VIEW,
+      songId,
+  });
+};
+
+export const shortlistSongTop = (songId, song) => (dispatch) => {
+  dispatch({
+      type: SHORTLIST_SONG_TOP,
+      songId,
+      song,
+  });
+};
+
+export const shortlistSong = (songId, song) => (dispatch) => {
+  dispatch({
+      type: SHORTLIST_SONG,
+      songId,
+      song,
+  });
+};
+
+export const delistSong = (songId) => (dispatch) => {
+  dispatch({
+      type: DELIST_SONG,
       songId,
   });
 };

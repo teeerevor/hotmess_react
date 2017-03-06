@@ -34,16 +34,6 @@ class Song extends React.Component {
                {song.name}</span>);
   }
 
-  shortlistAdd = () => {
-    this.setState({shortlisted: true});
-    PubSub.publish( 'addSong', this.props.song);
-  }
-
-  shortlistTop = () => {
-    this.setState({shortlisted: true});
-    PubSub.publish( 'topSong', this.props.song);
-  }
-
   render() {
     const {song, sortBy, shortlisted, isOpen} = this.props;
 
@@ -60,8 +50,8 @@ class Song extends React.Component {
           <IconPlay className={styles.iconPlay} />
           <IconTick className={styles.iconSelected} />
         </div>
-        <button className={btns.circleButton} onClick={this.shortlistTop} > <IconUparrow /> </button>
-        <button className={btns.circleButton} onClick={this.shortlistAdd} > <IconPlus /> </button>
+        <button className={btns.circleButton} onClick={() => this.props.onShortlistTop()} > <IconUparrow /> </button>
+        <button className={btns.circleButton} onClick={() => this.props.onShortlist()} > <IconPlus /> </button>
       </li>
     );
   }

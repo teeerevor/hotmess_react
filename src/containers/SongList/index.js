@@ -105,13 +105,13 @@ class SongList  extends React.Component {
             //let shortlisted = this.state.shortlistedSongs.includes(song.id);
                           //onShortlist={this.onShortlist}
                           //onShortlistTop={this.onShortlistTop}
-  renderSongList(songs, sortBy, openSongs) {
+  renderSongList(songs, sortBy, openSongs, shortlist) {
     return(
       <div className="scroller">
         <ul className="big-list list">
           {songs.map((song, i) => {
-            let shortlisted = false;
-            let open = _.indexOf(openSongs, song.id) !== -1;
+            let open        = _.includes(openSongs, song.id);
+            let shortlisted = _.includes(shortlist, song.id);
             return (
               <Song key={song.id}
                     song={song}
@@ -121,6 +121,16 @@ class SongList  extends React.Component {
                     onToggleSongView={this.props.toggleSongView.bind(
                                       this,
                                       song.id,
+                                      )}
+                    onShortlistTop={this.props.shortlistSongTop.bind(
+                                      this,
+                                      song.id,
+                                      song,
+                                      )}
+                    onShortlist={this.props.shortlistSong.bind(
+                                      this,
+                                      song.id,
+                                      song,
                                       )}
               />
             );
@@ -177,23 +187,27 @@ class SongList  extends React.Component {
 SongList.propTypes = {
   songs: PropTypes.array,
   isFetching: PropTypes.bool,
-  filterStart: PropTypes.bool,
-  filterEnd: PropTypes.bool,
-  sortBy: PropTypes.bool,
-  openSongs: PropTypes.array,
+  filterStart: PropTypes.string,
+  filterEnd: PropTypes.string,
+  sortBy: PropTypes.string,
   fetchSongsIfRequired: PropTypes.func,
   toggleSongView: PropTypes.func,
+  openSongs: PropTypes.array,
   toggleSortOrder: PropTypes.func,
   showMoreSongs: PropTypes.func,
+  shortlistSongTop: PropTypes.func,
+  shortlistSong: PropTypes.func,
+  shortlist: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
-    songs: state.songList.songs,
-    isFetching: state.songList.isFetching,
-    filterStart: state.songList.filterStart,
-    filterEnd: state.songList.filterEnd,
-    sortBy: state.songList.sortBy,
-    openSongs: state.songList.openSongs,
+  songs: state.songList.songs,
+  isFetching: state.songList.isFetching,
+  filterStart: state.songList.filterStart,
+  filterEnd: state.songList.filterEnd,
+  sortBy: state.songList.sortBy,
+  openSongs: state.songList.openSongs,
+  shortlist: state.songList.shortlist,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
