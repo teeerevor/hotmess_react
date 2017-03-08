@@ -102,7 +102,7 @@ export default function songListReducer(
     }
 
     case SHORTLIST_SONG:{
-      const shortlist = _.concat(state.shorlist, action.songId);
+      const shortlist = _.concat(state.shortlist, action.songId);
 
       return {
         ...state,
@@ -111,7 +111,7 @@ export default function songListReducer(
     }
 
     case SHORTLIST_SONG_TOP:{
-      const shortlist = _.concat([action.songId], state.shorlist);
+      const shortlist = _.concat([action.songId], state.shortlist);
 
       return {
         ...state,
@@ -120,7 +120,7 @@ export default function songListReducer(
     }
 
     case DELIST_SONG:{
-      const shortlist = _.without(state.shorlist, action.songId);
+      const shortlist = _.without(state.shortlist, action.songId);
 
       return {
         ...state,
