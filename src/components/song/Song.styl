@@ -23,15 +23,6 @@ $song-bottom-margin= 3px
     outline: none
 
 
-.shortlisted
-  @extend .song
-  .circleButton
-    opacity: 0
-  .iconSelected
-    display: inline
-  .iconPlay
-    opacity: 0
-
 .open
   @extend .song
   .iconPlay
@@ -40,13 +31,18 @@ $song-bottom-margin= 3px
     background: $song-background
     padding-bottom: 15px
 
-.oponAndShortlisted
+.shortlisted
   @extend .song
-  .circleButton
+  button
     opacity: 0
   .iconSelected
     display: inline
   .iconPlay
+    opacity: 0
+
+openAndShortlisted
+  @extend .shortlisted
+  button
     opacity: 0
   .tag
     background: $song-background

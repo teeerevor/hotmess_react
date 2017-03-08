@@ -105,7 +105,8 @@ class SongList  extends React.Component {
             //let shortlisted = this.state.shortlistedSongs.includes(song.id);
                           //onShortlist={this.onShortlist}
                           //onShortlistTop={this.onShortlistTop}
-  renderSongList(songs, sortBy, openSongs, shortlist) {
+  renderSongList() {
+    let {songs, sortBy, openSongs, shortlist} = this.props;
     return(
       <div className="scroller">
         <ul className="big-list list">
@@ -142,7 +143,7 @@ class SongList  extends React.Component {
 
       //<h3>{window.hotmess100.year} Song List</h3>
   render() {
-    let {songs, isFetching, sortBy, openSongs} = this.props;
+    let {songs, sortBy, isFetching} = this.props;
     let songBlock;
 
     if (isFetching) {
@@ -150,7 +151,7 @@ class SongList  extends React.Component {
     }else if (songs && songs.length == 0) {
       songBlock = this.renderEmptyState(sortBy);
     } else if (songs && songs.length > 0) {
-      songBlock = this.renderSongList(songs, sortBy, openSongs);
+      songBlock = this.renderSongList();
     }
 
     let sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS";
