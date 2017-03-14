@@ -41,37 +41,6 @@ class SongList  extends React.Component {
     //this.setState({currentSong: nextSong});
   //}
 
-  //playRandomSong() {
-    //let songNumber = Math.round(Math.random() * this.state.songData.length),
-        //song = this.state.songData[songNumber],
-        //songFirstLetter = song.name.charAt(0),
-        //filterLetter = filter.checkLetter(songFirstLetter),
-        //filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, songFirstLetter, songFirstLetter);
-
-    //this.setState({
-      //currentSong: song,
-      //endFilter: filterLetter,
-      //sortBy: 'song',
-      //startFilter: filterLetter,
-      //songs: filteredSongs
-    //});
-  //}
-
-  //jumpToSong(song) {
-    //let songFirstLetter = song.name.charAt(0),
-        //filterLetter = filter.checkLetter(songFirstLetter),
-        //filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, songFirstLetter, songFirstLetter);
-
-    //this.setState({
-      //currentSong: song,
-      //endFilter: filterLetter,
-      //sortBy: 'song',
-      //startFilter: filterLetter,
-      //songs: filteredSongs
-    //});
-  //}
-
-
   renderLoading() {
     return(
       <div className="emptyState">

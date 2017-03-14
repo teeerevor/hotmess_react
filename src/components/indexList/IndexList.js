@@ -40,7 +40,7 @@ IndexList.propTypes = {
   showSongAtIndex: PropTypes.func,
 };
 
-const mapStateToProps = () => {};
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
