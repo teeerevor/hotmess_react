@@ -12,6 +12,8 @@ import {
   DELIST_SONG,
   JUMP_TO_SONG,
   RANDOM_SONG,
+  NEXT_SONG,
+  PREVIOUS_SONG,
 } from './types';
 
 
@@ -45,7 +47,7 @@ export default function songListReducer(
         openSongs,
         filterStart: filterLetter,
         filterEnd: filterLetter,
-        song: song,
+        currentSong: song,
       };
   };
 
@@ -108,16 +110,19 @@ export default function songListReducer(
     }
 
     case TOGGLE_SONG_VIEW: {
-      let openSongs;
-      let songIsOpen = _.includes(state.openSongs, action.songId);
-      if( songIsOpen )
-        openSongs = _.without(state.openSongs, action.songId);
-      else
-        openSongs = _.concat(state.openSongs, action.songId);
+      let {openSongs, currentSong} = state;
+      let songIsOpen = _.includes(openSongs, action.songId);
+      if( songIsOpen ) {
+        openSongs = _.without(openSongs, action.songId);
+      } else {
+        openSongs = _.concat(openSongs, action.songId);
+        currentSong = action.song;
+      }
 
       return {
         ...state,
         openSongs,
+        currentSong,
       };
     }
 
@@ -126,6 +131,26 @@ export default function songListReducer(
       const randomSong = state.songData[songNumber];
 
       return jumpToSong(state, randomSong);
+    }
+
+    case NEXT_SONG: {
+      const { currentSong, songs } = state
+      const currentIndex = _.findIndex(songs, (s) => { return s.id == currentSong.id; });
+      const nextSong = songs[ currentIndex + 1 ];
+      return jumpToSong(state, nextSong);
+    }
+
+    case PREVIOUS_SONG: {
+      const { currentSong, songs, songData } = state
+      let previousSong;
+      let currentIndex = _.findIndex(songs, (s) => { return s.id == currentSong.id; });
+      if (currentIndex > 0){
+        previousSong = songs[ currentIndex - 1 ];
+      } else {
+        currentIndex = _.findIndex(songData, (s) => { return s.id == currentSong.id; });
+        previousSong = songData[ currentIndex - 1 ];
+      }
+      return jumpToSong(state, previousSong);
     }
 
     case JUMP_TO_SONG:{

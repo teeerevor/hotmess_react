@@ -71,10 +71,11 @@ export const showSongAtIndex = (index) => (dispatch) => {
   });
 };
 
-export const toggleSongView = (songId) => (dispatch) => {
+export const toggleSongView = (songId, song) => (dispatch) => {
   dispatch({
       type: TOGGLE_SONG_VIEW,
       songId,
+      song,
   });
 };
 

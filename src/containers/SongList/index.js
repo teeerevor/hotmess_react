@@ -29,18 +29,6 @@ class SongList  extends React.Component {
     //});
   //}
 
-  //getNextSong(song) {
-    //let nextSong = this.state.songs[song.index + 1];
-    //PubSub.publish('updateCurrentSong', nextSong);
-    //this.setState({currentSong: nextSong});
-  //}
-
-  //getPreviousSong(song) {
-    //let nextSong = this.state.songs[song.index - 1];
-    //PubSub.publish('updateCurrentSong', nextSong);
-    //this.setState({currentSong: nextSong});
-  //}
-
   renderLoading() {
     return(
       <div className="emptyState">
@@ -71,9 +59,6 @@ class SongList  extends React.Component {
     );
   }
 
-            //let shortlisted = this.state.shortlistedSongs.includes(song.id);
-                          //onShortlist={this.onShortlist}
-                          //onShortlistTop={this.onShortlistTop}
   renderSongList() {
     let {songs, sortBy, openSongs, shortlist} = this.props;
     return(
@@ -91,6 +76,7 @@ class SongList  extends React.Component {
                     onToggleSongView={this.props.toggleSongView.bind(
                                       this,
                                       song.id,
+                                      song,
                                       )}
                     onShortlistTop={this.props.shortlistSongTop.bind(
                                       this,

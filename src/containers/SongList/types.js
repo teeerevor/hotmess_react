@@ -10,4 +10,7 @@ export const SHORTLIST_SONG_TOP       = 'SHORTLIST_SONG_TOP';
 export const SHORTLIST_SONG           = 'SHORTLIST_SONG';
 export const DELIST_SONG              = 'DELIST_SONG';
 export const JUMP_TO_SONG             = 'JUMP_TO_SONG';
-export const RANDOM_SONG              = 'RANDOM_SONG';
+
+export const RANDOM_SONG ='RANDOM_SONG';
+export const NEXT_SONG ='NEXT_SONG';
+export const PREVIOUS_SONG ='PREVIOUS_SONG';

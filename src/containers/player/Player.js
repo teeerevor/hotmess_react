@@ -6,7 +6,11 @@ import * as actions from './actions';
 class Player  extends React.Component {
   render() {
     return (
-      <button onClick={this.props.playRandomSong}>Play random</button>
+      <div>
+        <button onClick={this.props.playRandomSong}>Play random</button>
+        <button onClick={this.props.playNextSong}>Next</button>
+        <button onClick={this.props.playPrevSong}>Previous</button>
+      </div>
     );
   }
 }
