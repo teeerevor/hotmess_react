@@ -8,7 +8,7 @@ const Hottest100Page = (props) => {
     <div>
       <Player />
       <IndexList />
-      <SongList />
+      <SongList year={props.params.year}/>
     </div>
   );
 };

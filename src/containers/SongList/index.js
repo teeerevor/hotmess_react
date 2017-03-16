@@ -78,9 +78,8 @@ class SongList  extends React.Component {
     );
   }
 
-      //<h3>{window.hotmess100.year} Song List</h3>
   render() {
-    let {songs, sortBy, isFetching} = this.props;
+    let {songs, sortBy, year, isFetching} = this.props;
     let songBlock;
 
     if (isFetching) {
@@ -98,7 +97,7 @@ class SongList  extends React.Component {
         <nav className="toggle-sort">
           <a onClick={this.props.toggleSortOrder}>{sortLabel}</a>
         </nav>
-        <h3>2016 Song List</h3>
+        <h3>{year} Song List</h3>
         {songBlock}
       </div>
     );
