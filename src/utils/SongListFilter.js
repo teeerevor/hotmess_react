@@ -10,6 +10,17 @@ export default class SongListFilter{
     }
   }
 
+  getPrevLetter(letter){
+    switch (letter) {
+      case 'top':
+        return 'top';
+      case 'a':
+        return 'top';
+      default:
+        return String.fromCharCode(letter.charCodeAt(letter.length - 1) - 1);
+    }
+  }
+
   checkLetter(letter) {
     let nonLetter = /^\W|^\d/i;
     if (nonLetter.test(letter)) {

@@ -11,24 +11,6 @@ class SongList  extends React.Component {
     this.props.fetchSongsIfRequired();
   }
 
-  //showPrevAlphaIndex() {
-    //let newStart      = filter.getPreviousLetter(this.state.startFilter);
-    //let filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, newStart, this.state.startFilter);
-    //this.setState({
-      //startFilter: newStart,
-      //songs: filteredSongs
-    //});
-  //}
-
-  //showNextAlphaIndex() {
-    //let newEnd        = filter.getNextLetter(this.state.endFilter);
-    //let filteredSongs = filter.filterSongs(this.state.songData, this.state.sortBy, this.state.startFilter, newEnd);
-    //this.setState({
-      //endFilter: newEnd,
-      //songs: filteredSongs
-    //});
-  //}
-
   renderLoading() {
     return(
       <div className="emptyState">
@@ -53,8 +35,8 @@ class SongList  extends React.Component {
           There are no <b>{sortBy}s</b> starting with <b>{this.props.filterStart.toUpperCase()}</b> in this list.
         </p>
 
-        <button onClick={this.showPrevAlphaIndex}>BACK UP!</button>
-        <button onClick={this.showNextAlphaIndex}>GO FORTH!</button>
+        <button onClick={this.props.showPrevListIndex}>BACK UP!</button>
+        <button onClick={this.props.showNextListIndex}>GO FORTH!</button>
       </div>
     );
   }
@@ -159,8 +141,6 @@ SongList.propTypes = {
 const mapStateToProps = (state) => ({
   songs: state.songList.songs,
   isFetching: state.songList.isFetching,
-  filterStart: state.songList.filterStart,
-  filterEnd: state.songList.filterEnd,
   sortBy: state.songList.sortBy,
   openSongs: state.songList.openSongs,
   shortlist: state.songList.shortlist,

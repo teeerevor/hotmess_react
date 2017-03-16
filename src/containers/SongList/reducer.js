@@ -5,6 +5,8 @@ import {
   FETCH_SONGS_SUCCESS,
   SHOW_MORE_SONGS,
   SHOW_SONGS_STARTING_WITH,
+  SHOW_SONGS_AT_PREV_INDEX,
+  SHOW_SONGS_AT_NEXT_INDEX,
   TOGGLE_SONG_ORDERING,
   TOGGLE_SONG_VIEW,
   SHORTLIST_SONG_TOP,
@@ -26,8 +28,8 @@ export default function songListReducer(
     currentSong: {},
     shortlist: [],
     sortBy: 'artist',
-    filterStart: 'top',
-    filterEnd: 'top',
+    filterStart: 'TOP',
+    filterEnd: 'TOP',
   },
   action,
 ) {
@@ -80,12 +82,33 @@ export default function songListReducer(
     }
 
     case SHOW_SONGS_STARTING_WITH: {
-      const songs = filter.filterSongs(state.songData, state.sortBy, action.index, action.index);
       return {
         ...state,
-        songs,
+        songs: filter.filterSongs(state.songData, state.sortBy, action.index, action.index),
         filterStart: action.index,
         filterEnd: action.index,
+      };
+    }
+
+    case SHOW_SONGS_AT_NEXT_INDEX: {
+      const {songData, sortBy, filterStart} = state;
+      const nextIndex =  filter.getNextLetter(filterStart);
+      return {
+        ...state,
+        songs: filter.filterSongs(songData, sortBy, nextIndex, nextIndex),
+        filterStart: nextIndex,
+        filterEnd: nextIndex,
+      };
+    }
+
+    case SHOW_SONGS_AT_PREV_INDEX: {
+      const {songData, sortBy, filterStart} = state;
+      const prevIndex =  filter.getPrevLetter(filterStart);
+      return {
+        ...state,
+        songs: filter.filterSongs(songData, sortBy, prevIndex, prevIndex),
+        filterStart: prevIndex,
+        filterEnd: prevIndex,
       };
     }
 

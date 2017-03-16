@@ -3,11 +3,17 @@ import {
   FETCH_SONGS_SUCCESS,
   SHOW_MORE_SONGS,
   SHOW_SONGS_STARTING_WITH,
+  SHOW_SONGS_AT_PREV_INDEX,
+  SHOW_SONGS_AT_NEXT_INDEX,
   TOGGLE_SONG_ORDERING,
   TOGGLE_SONG_VIEW,
   SHORTLIST_SONG_TOP,
   SHORTLIST_SONG,
   DELIST_SONG,
+  JUMP_TO_SONG,
+  RANDOM_SONG,
+  NEXT_SONG,
+  PREVIOUS_SONG,
 } from './types';
 
 export const fetchSongsIfRequired = () => (dispatch) =>  {
@@ -68,6 +74,18 @@ export const showSongAtIndex = (index) => (dispatch) => {
   dispatch({
       type: SHOW_SONGS_STARTING_WITH,
       index: index,
+  });
+};
+
+export const showPrevListIndex = () => (dispatch) => {
+  dispatch({
+      type: SHOW_SONGS_AT_PREV_INDEX,
+  });
+};
+
+export const showNextListIndex = () => (dispatch) => {
+  dispatch({
+      type: SHOW_SONGS_AT_NEXT_INDEX,
   });
 };
 
