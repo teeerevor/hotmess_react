@@ -7,27 +7,21 @@ import * as styles from './IndexList.styl';
 class IndexList  extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {active: "TOP"};
   }
 
   indexItems(){
     return ['TOP'].concat("ABCDEFGHIJKLMNOPQRSTUVW".split('')).concat('XYZ');
   }
 
-  changeIndex(index){
-    this.props.showSongAtIndex(index);
-    this.setState({active: index});
-  }
-
   render() {
-    const active = this.state.active;
+    const { activeIndex } = this.props;
     return(
       <nav className={styles.indexList} >
       {this.indexItems().map((item) =>
         <button
           key={item}
-          onClick={this.changeIndex.bind(this, item)}
-          className={active === item ? styles.active : styles.index}
+          onClick={this.props.showSongAtIndex.bind(this, item)}
+          className={activeIndex === item ? styles.active : styles.index}
         > {item}
         </button>
       )}
@@ -38,9 +32,12 @@ class IndexList  extends React.Component {
 
 IndexList.propTypes = {
   showSongAtIndex: PropTypes.func,
+  activeIndex: PropTypes.string,
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  activeIndex: state.songList.filterStart,
+});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
