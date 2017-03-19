@@ -1,0 +1,48 @@
+import _ from 'lodash';
+import {
+  TOGGLE_PLAY,
+  TOGGLE_MODE,
+  MODE_SINGLE,
+  MODE_CONTINUOUS,
+  MODE_RANDOM,
+  MODE_REPEAT,
+} from './types';
+
+export default function playerReducer(
+  state = {
+    playing: false,
+    mode: MODE_SINGLE,
+  },
+  action,
+) {
+  switch (action.type) {
+    case TOGGLE_PLAY:{
+      return {
+        ...state,
+        playing: !state.playing,
+      };
+    }
+
+    case TOGGLE_MODE:{
+      let mode;
+      switch(state.mode){
+        case MODE_SINGLE:
+          mode = MODE_CONTINUOUS;
+        case MODE_CONTINUOUS:
+          mode = MODE_REPEAT;
+        case MODE_REPEAT:
+          mode = MODE_RANDOM;
+        case MODE_RANDOM:
+          mode = MODE_SINGLE;
+      }
+
+      return {
+        ...state,
+        mode,
+      };
+    }
+
+    default:
+      return state;
+  }
+}

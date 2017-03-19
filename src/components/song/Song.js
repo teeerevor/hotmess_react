@@ -4,7 +4,6 @@ import IconUparrow        from '../svgs/IconUparrow';
 import IconPlay           from '../svgs/IconPlay';
 import IconTick           from '../svgs/IconTick';
 import SongAudio          from '../song_audio/SongAudio';
-import PubSub             from 'pubsub-js';
 import styles             from './Song.styl';
 import btns               from '../../styles/buttons.styl';
 
@@ -15,7 +14,9 @@ class Song extends React.Component {
 
   renderAudio = (song, open) => {
     if( open )
-      return (<div className={styles.songAudio}><SongAudio song={song} /></div>);
+      return (<div className={styles.songAudio}>
+                <SongAudio song={song} />
+              </div>);
   }
 
   arrangeSongInfo(song, sortBy) {
@@ -31,7 +32,8 @@ class Song extends React.Component {
       return (<span className={styles.text}>
                 <b>{song.artist}</b>
                 &nbsp;-&nbsp;
-               {song.name}</span>);
+               {song.name}
+              </span>);
   }
 
   render() {
