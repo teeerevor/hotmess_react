@@ -48,7 +48,7 @@ export default {
       {test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=[name].[ext]'},
       {test: /\.ico$/, loader: 'file?name=[name].[ext]'},
       {test: /(\.css|\.scss|\.sass)$/, loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']},
-      {test: /\.styl$/, loaders: ['style-loader',  'css-loader?modules=true&localIdentName=[name]__[local]___[hash:base64:5]', 'stylus-loader', 'postcss' ]},
+      {test: /\.styl$/, loaders: ['style-loader',  'css-loader?modules=true&camelCase=dashes&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss', 'stylus-loader' ]},
       {test: /\.json$/, loader: "json"}
     ]
   },
