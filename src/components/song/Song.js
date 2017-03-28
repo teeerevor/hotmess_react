@@ -8,10 +8,6 @@ import styles             from './Song.styl';
 import btns               from '../../styles/buttons.styl';
 
 class Song extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    this.setState({open: nextProps.open});
-  }
-
   renderAudio = (song, open) => {
     if( open )
       return (<div className={styles.songAudio}>
@@ -22,9 +18,7 @@ class Song extends React.Component {
   arrangeSongInfo(song, sortBy) {
     if(sortBy === 'song')
       return (<span className={styles.text}>
-                <b>
-                  {song.name}
-                </b>
+                <b> {song.name} </b>
                 &nbsp;-&nbsp;
                 {song.artist}
               </span>);
@@ -46,14 +40,14 @@ class Song extends React.Component {
 
     return (
       <li className={className} data-id={this.props.song.id}>
-        <div className={styles.tag} onClick={() => this.props.onToggleSongView()}>
+        <div className={styles.tag} onClick={this.props.onToggleSongView}>
           {this.arrangeSongInfo(song, sortBy)}
           {this.renderAudio(song, isOpen)}
           <IconPlay className={styles.iconPlay} />
           <IconTick className={styles.iconSelected} />
         </div>
-        <button className={btns.circleButton} onClick={() => this.props.onShortlistTop()} > <IconUparrow /> </button>
-        <button className={btns.circleButton} onClick={() => this.props.onShortlist()} > <IconPlus /> </button>
+        <button className={btns.circleButton} onClick={this.props.onShortlistTop} > <IconUparrow /> </button>
+        <button className={btns.circleButton} onClick={this.props.onShortlist} > <IconPlus /> </button>
       </li>
     );
   }

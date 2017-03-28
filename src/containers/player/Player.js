@@ -2,84 +2,44 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './actions';
-
-import IconPlay from '../../components/svgs/IconPlay';
-import IconPause from '../../components/svgs/IconPause';
-import IconBack from '../../components/svgs/IconBack';
-import IconForward from '../../components/svgs/IconForward';
-import IconContinuous from '../../components/svgs/IconContinuous';
-import IconSingle from '../../components/svgs/IconSingle';
-import IconRandom from '../../components/svgs/IconRandom';
-
+import Random from '../../components/player/Random';
+import Player from '../../components/player/Player';
+import Logo from '../../components/svgs/Logo';
 import styles from './styles.styl';
-import {
-  MODE_SINGLE,
-  MODE_CONTINUOUS,
-  MODE_RANDOM,
-  MODE_REPEAT,
-} from './types.js';
 
-class Player  extends React.Component {
-  renderRandom() {
-    return(
-      <div className={styles.playerRandom}>
-        <button className={styles.random} onClick={this.props.playRandom}>
-          <IconPlay className={styles.iconPlay} />
-        </button>
-        <div className={styles.iFeelLucky}>
-          Fuck it play something
-        </div>
-      </div>
-    );
-  }
+export const DEFAULT = 'DEFAULT';
+export const CONTINUOUS = 'CONTINUOUS';
+export const REPEAT = 'REPEAT';
+export const RANDOM = 'RANDOM';
 
-  renderButtons() {
-    const { playing } = this.props;
-    return(
-      <div className={styles.playerButtons}>
-        <button className={styles.backButton} onClick={this.props.playPrevSong}>
-          <IconBack />
-        </button>
 
-        <button
-          className={styles.circleButton}
-          onClick={this.props.toggelPlay}
-        >
-          <IconPlay className={styles.iconPlay} />
-          <IconPause className={styles.iconPlay} />
-        </button>
-
-        <button className={styles.fwdButton} onClick={this.props.playNextSong}>
-          <IconForward />
-        </button>
-
-        <button className={styles.mode} onClick={this.props.toggleMode}>
-          <IconContinuous />
-          <IconSingle />
-          <IconRandom />
-        </button>
-      </div>
-    );
-  }
-
-  renderPlayer() {
-    const { song = {} } = this.props;
-    return(
-      <div className={styles.playerDisplay}>
-        <div className={styles.currentSong}>
-          <b>{ song.name }</b>
-          { song.artist }
-        </div>
-        {this.renderButtons()}
-      </div>
-    );
-  }
-
+class PlayerContainer  extends React.Component {
   render() {
-    const section = this.props.currentSong == [] ?  this.renderRandom : this.renderPlayer;
+    const {song, playing, mode} = this.props;
+    const { toggleMode,
+            togglePlay,
+            playNextSong,
+            playPrevSong,
+            playRandomSong,
+    } = this.props;
+    const showRandom = song.id === undefined;
     return (
-      <div className={styles.player}>
-        {this.renderRandom()}
+      <div className={styles.header}>
+        <Logo className={styles.logo}/>
+        {
+          showRandom ?
+            <Random onClick={playRandomSong}/>
+            :
+            <Player
+              song={song}
+              playing={playing}
+              onPlayPause={togglePlay}
+              mode={mode}
+              onNext={playNextSong}
+              onPrev={playPrevSong}
+              onModeChange={toggleMode}
+            />
+        }
       </div>
     );
   }
@@ -93,4 +53,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);

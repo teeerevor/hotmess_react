@@ -1,0 +1,31 @@
+@import '../../styles/colours'
+@import 'control_panel'
+
+.box
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 100%
+
+.random
+  @extend .button-big
+
+.i-feel-lucky.show
+  transform: translateX(15px)
+  opacity: 1
+  z-index: 0
+
+.i-feel-lucky
+  position: absolute
+  top: 7px
+  left: 35px
+  letter-spacing: 1px
+  min-width: 170px
+  font-size: 14px
+  opacity: 0
+  will-change: transform, opacity
+  transition-property: opacity transform
+  transition-duration: 100ms
+
+

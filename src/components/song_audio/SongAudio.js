@@ -1,4 +1,7 @@
 import React, {PropTypes} from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../containers/player/actions';
 import AudioTrack from './AudioTrack';
 import YoutubeTrack from './YoutubeTrack';
 
@@ -10,9 +13,20 @@ class SongAudio extends React.Component {
   }
 
   render() {
-    switch (this.hasAudio(this.props.song)) {
+    const {song, playingSong, playing} = this.props;
+    const {playSong, pauseSong, songEnded} = this.props;
+    const imPlaying = song.id === playingSong.id && playing;
+
+    switch (this.hasAudio(song)) {
       case "youtube":
-        return( <YoutubeTrack className="song-audo" song={this.props.song} /> );
+        return <YoutubeTrack
+                  className="song-audio"
+                  song={song}
+                  playing={imPlaying}
+                  onPlay={playSong}
+                  onPause={pauseSong}
+                  onEnd={songEnded}
+                />
       case "soundclound":
         return( <div /> );
       default:
@@ -25,4 +39,17 @@ SongAudio.propTypes = {
   song: PropTypes.object.isRequired
 };
 
-export default SongAudio;
+const mapStateToProps = (state) => ({
+  songs: state.songList.songs,
+  isFetching: state.songList.isFetching,
+  sortBy: state.songList.sortBy,
+  openSongs: state.songList.openSongs,
+  shortlist: state.songList.shortlist,
+  playingSong: state.songList.currentSong,
+  playing: state.player.playing,
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongAudio);
+

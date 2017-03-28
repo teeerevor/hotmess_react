@@ -11,6 +11,8 @@
     To track JavaScript errors via TrackJS, sign up for a free trial at TrackJS.com and enter your token in /webpack.config.prod.js on line 55.
    -->
    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+   <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,400,400i,600,700" rel="stylesheet">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" rel="stylesheet">
 
   <% if (htmlWebpackPlugin.options.trackJSToken) { %>
   <script>window._trackJs = {token: '<%= htmlWebpackPlugin.options.trackJSToken %>'};</script>
@@ -22,6 +24,12 @@
   <title>Hottest100.io</title>
 </head>
 <body>
+    <style>
+      body {
+        font-family: 'Open Sans', sans-serif;
+        color: #4a4a4a
+      }
+    </style>
   <div id="app"></div>
   <script>
     //load youtube vid api

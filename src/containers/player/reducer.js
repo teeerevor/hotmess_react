@@ -1,7 +1,8 @@
-import _ from 'lodash';
 import {
   TOGGLE_PLAY,
   TOGGLE_MODE,
+  PLAY_SONG,
+  PAUSE_SONG,
   MODE_SINGLE,
   MODE_CONTINUOUS,
   MODE_RANDOM,
@@ -20,6 +21,19 @@ export default function playerReducer(
       return {
         ...state,
         playing: !state.playing,
+      };
+    }
+
+    case PLAY_SONG:{
+      return {
+        ...state,
+        playing: true,
+      };
+    }
+    case PAUSE_SONG:{
+      return {
+        ...state,
+        playing: false,
       };
     }
 

@@ -1,0 +1,53 @@
+@import '../../styles/colours'
+
+.control-panel
+  display: flex
+  align-items: center
+  margin-left: 2em
+
+.svg
+  overflow: visible
+
+button
+  &:focus
+    outline: 0
+
+$button-size= 35px
+.button-big
+  @extend button
+  height: $button-size
+  width: $button-size
+  border: 0
+  cursor: pointer
+  padding: 0
+  text-align: center
+  border-radius: $button-size
+  background-color: $button-grey
+  margin: 0 0.5em
+  svg
+    @extend .svg
+    fill: white
+  &:hover
+    background-color: $button-red
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2)
+
+.button-small
+  @extend button
+  background-color: transparent
+  border: 0
+  svg
+    @extend .svg
+    fill: $button-grey
+  &:hover
+    svg
+      fill: $button-red
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2))
+
+
+.play
+  position: relative
+  left: 3px
+
+.button-mode
+  @extend .button-small
+  margin-left: 1em

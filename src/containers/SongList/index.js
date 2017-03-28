@@ -5,6 +5,7 @@ import * as actions from './actions';
 import InlineSvg from '../../components/InlineSvg';
 import Song from '../../components/song/Song';
 import _ from 'lodash';
+import styles from './styles.styl';
 
 class SongList  extends React.Component {
   componentWillMount() {
@@ -24,7 +25,8 @@ class SongList  extends React.Component {
     );
   }
 
-  renderEmptyState(sortBy) {
+  renderEmptyState() {
+    let {sortBy, filterStart} = this.props;
     return(
       <div className="emptyState">
         <InlineSvg iconClass={'no-tunes'} iconName={'#no-tunes'} />
@@ -32,7 +34,7 @@ class SongList  extends React.Component {
           WOAH! NO TUNES.
         </h4>
         <p>
-          There are no <b>{sortBy}s</b> starting with <b>{this.props.filterStart.toUpperCase()}</b> in this list.
+          There are no <b>{sortBy}s</b> starting with <b>{filterStart}</b> in this list.
         </p>
 
         <button onClick={this.props.showPrevListIndex}>BACK UP!</button>
@@ -42,13 +44,14 @@ class SongList  extends React.Component {
   }
 
   renderSongList() {
-    let {songs, sortBy, openSongs, shortlist} = this.props;
+    const {songs, sortBy, openSongs, shortlist, currentSong, playing} = this.props;
     return(
       <div className="scroller">
         <ul className="big-list list">
           {songs.map((song, i) => {
-            let open        = _.includes(openSongs, song.id);
-            let shortlisted = _.includes(shortlist, song.id);
+            const open        = _.includes(openSongs, song.id);
+            const shortlisted = _.includes(shortlist, song.id);
+
             return (
               <Song key={song.id}
                     song={song}
@@ -80,25 +83,24 @@ class SongList  extends React.Component {
 
   render() {
     let {songs, sortBy, year, isFetching} = this.props;
-    let songBlock;
+    let section;
 
     if (isFetching) {
-      songBlock = this.renderLoading();
+      section = this.renderLoading();
     }else if (songs && songs.length == 0) {
-      songBlock = this.renderEmptyState(sortBy);
+      section = this.renderEmptyState();
     } else if (songs && songs.length > 0) {
-      songBlock = this.renderSongList();
+      section = this.renderSongList();
     }
 
     let sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS";
     return (
-      <div className="song-section">
-        <button onClick={this.props.showMoreSongs}>show more</button>
-        <nav className="toggle-sort">
+      <div className={styles.songSection}>
+        <nav className={styles.toggleListSort}>
           <a onClick={this.props.toggleSortOrder}>{sortLabel}</a>
         </nav>
-        <h3>{year} Song List</h3>
-        {songBlock}
+        <h3>{year} SONG LIST</h3>
+        {section}
       </div>
     );
   }
@@ -143,6 +145,8 @@ const mapStateToProps = (state) => ({
   sortBy: state.songList.sortBy,
   openSongs: state.songList.openSongs,
   shortlist: state.songList.shortlist,
+  currentSong: state.songList.currentSong,
+  playing: state.player.playing,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);

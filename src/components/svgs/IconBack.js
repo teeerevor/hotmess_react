@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import styles from './styles.styl';
 
-export const IconBack = ({className}) => {
+const IconBack = ({className}) => {
   const classes = cx(styles.back);
   //const classes = cx(styles.pause, this.props.className);
   return (
@@ -17,4 +17,6 @@ export const IconBack = ({className}) => {
 IconBack.propTypes = {
   className: PropTypes.string,
 };
+
+export default IconBack;
 

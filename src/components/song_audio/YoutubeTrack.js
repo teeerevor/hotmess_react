@@ -1,22 +1,9 @@
 import React, {PropTypes} from 'react';
-//import PubSub   from 'pubsub-js';
 
 export default class YoutubeTrack extends React.Component {
-  //componentWillMount() {
-    //let thisPlayer = this;
-    //[> eslint-disable <]
-    //this.pubsubPlay = PubSub.subscribe('playerPlay', function(topic, song) {
-      //thisPlayer.play(song);
-    //}.bind(this));
-    //this.pubsubPause = PubSub.subscribe('playerPause', function(topic) {
-      //thisPlayer.pause();
-    //}.bind(this));
-    //[> eslint-enable <]
-  //}
-
   componentDidMount() {
-    let videoId = this.props.song.youtube_key;
-    let divId = this.ytDivId();
+    const videoId = this.props.song.youtube_key;
+    const divId = this.ytDivId();
     this.player = new YT.Player(divId, {  // eslint-disable-line
       videoId: videoId,
       playerVars: { 'autoplay': 1},
@@ -24,56 +11,48 @@ export default class YoutubeTrack extends React.Component {
         'onStateChange': this.onPlayerStateChange
       }
     });
-
-    //PubSub.publish( 'playerPause');
   }
 
   componentWillUnmount() {
     this.player.destroy();
   }
 
-  onPlayerStateChange(e){
+  onPlayerStateChange = (e) => {
     /*eslint-disable */
     //BUFFERING: 3 CUED: 5 ENDED: 0 PAUSED: 2 PLAYING: 1 UNSTARTED: -1
-    //switch (e.data) {
-      //case YT.PlayerState.PLAYING:
-        //PubSub.publish( 'songPlay', this.props.song);
-        //break;
-      //case YT.PlayerState.PAUSED:
-        //PubSub.publish( 'songPause', this.props.song);
-        //break;
-      //case YT.PlayerState.ENDED:
-        //PubSub.publish( 'songEnded', this.props.song);
-        //break;
-    //}
+    switch (e.data) {
+      case YT.PlayerState.PLAYING:
+        this.props.onPlay();
+        break;
+      case YT.PlayerState.PAUSED:
+        this.props.onPause();
+        break;
+      case YT.PlayerState.ENDED:
+        this.props.onEnd();
+        break;
+    }
     /*eslint-enable */
   }
 
-  //play(song) {
-    //if(this.props.song.id === song.id)
-      //this.player.playVideo();
-    //else
-      //this.player.pauseVideo();
-  //}
+  ytDivId = () =>
+    'yt-video-'+this.props.song.youtube_key;
 
-  //pause() {
-    //if(this.player.pauseVideo){
-      //this.player.pauseVideo();
-    //}
-  //}
-
-  ytDivId() {
-    return 'yt-video-'+this.props.song.youtube_key;
+  componentWillReceiveProps = (nextProps) => {
+    if ( nextProps.playing !== this.props.playing ){
+      nextProps.playing ?
+        this.player.playVideo()
+        :
+        this.player.pauseVideo();
+    }
   }
 
-  render(){
-    let ytId = this.ytDivId();
-    return(
-        <div id={ytId} />
-    );
-  }
+  render = () =>
+    <div id={this.ytDivId()} />
 }
 
 YoutubeTrack.propTypes = {
-  song: PropTypes.object.isRequired
+  song: PropTypes.object.isRequired,
+  onPlayPause: PropTypes.func,
+  onEnd: PropTypes.func,
+  playing: PropTypes.bool,
 };
