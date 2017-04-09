@@ -48,17 +48,19 @@ const ControlPanel = ({
         onClick={onPlayPause}
       >
         { playing ?
-          <IconPlay  className={styles.play}/>
-          :
           <IconPause />
+          :
+          <IconPlay  className={styles.play}/>
         }
       </button>
+
       <button
         className={styles.buttonSmall}
         onClick={onNext}
       >
         <IconForward />
       </button>
+
       <button
         className={styles.buttonMode}
         onClick={onModeChange}
