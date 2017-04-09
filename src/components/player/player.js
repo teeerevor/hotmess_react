@@ -1,11 +1,5 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ControlPanel from './ControlPanel';
-import {
-  MODE_SINGLE,
-  MODE_CONTINUOUS,
-  MODE_RANDOM,
-  MODE_REPEAT,
-} from '../../containers/player/types.js';
 import styles from './player.styl';
 
 const Player = ({
@@ -33,6 +27,16 @@ const Player = ({
       />
     </div>
   );
-}
+};
+
+Player.propTypes = {
+  song: PropTypes.obj,
+  playing: PropTypes.bool,
+  mode: PropTypes.string,
+  onModeChange: PropTypes.func,
+  onPlayPause: PropTypes.func,
+  onPrev: PropTypes.func,
+  onNext: PropTypes.func,
+};
 
 export default Player;

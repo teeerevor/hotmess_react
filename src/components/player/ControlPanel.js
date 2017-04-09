@@ -1,10 +1,8 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {
-  DEFAULT,
-  CONTINUOUS,
   REPEAT,
   RANDOM,
-} from '../../containers/player/Player'
+} from '../../containers/player/Player';
 import IconPlay from '../svgs/IconPlay';
 import IconPause from '../svgs/IconPause';
 import IconBack from '../svgs/IconBack';
@@ -15,16 +13,20 @@ import IconRandom from '../svgs/IconRandom';
 
 import styles from './control_panel.styl';
 
-const ModeIcon = ({mode}) => {
+export const ModeIcon = ({mode}) => {
   switch(mode) {
     case REPEAT:
-      return <IconSingle />
+      return <IconSingle />;
     case RANDOM:
-      return <IconRandom />
+      return <IconRandom />;
     default:
-      return <IconContinuous />
+      return <IconContinuous />;
   }
-}
+};
+
+ModeIcon.propTypes = {
+  mode: PropTypes.string,
+};
 
 const ControlPanel = ({
   playing,
@@ -70,6 +72,15 @@ const ControlPanel = ({
 
     </div>
   );
-}
+};
+
+ControlPanel.propTypes = {
+  playing: PropTypes.bool,
+  mode: PropTypes.string,
+  onModeChange: PropTypes.func,
+  onPlayPause: PropTypes.func,
+  onPrev: PropTypes.func,
+  onNext: PropTypes.func,
+};
 
 export default ControlPanel;
