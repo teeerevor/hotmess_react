@@ -2,7 +2,6 @@
 @import 'control_panel'
 
 .box
-  position: relative
   display: flex
   justify-content: center
   align-items: center
@@ -10,18 +9,19 @@
 
 .random
   @extend .button-big
+  position: relative
   svg
     @extend .play
 
-.i-feel-lucky.show
-  transform: translateX(15px)
+.random&:hover .i-feel-lucky
+  transform: translateX(10px)
   opacity: 1
   z-index: 0
 
 .i-feel-lucky
   position: absolute
-  top: 7px
-  left: 35px
+  top: 8px
+  left: 20px
   letter-spacing: 1px
   min-width: 170px
   font-size: 14px
