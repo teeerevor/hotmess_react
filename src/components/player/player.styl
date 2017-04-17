@@ -2,18 +2,25 @@
 @import '../../styles/helpers'
 
 .playerDisplay
+  align-items: center
   display: flex
   flex: 1
   justify-content: center
-  align-items: center
 
 .currentSong
   display: flex
   flex-direction: column
   flex: 1
+  min-width: 0
   text-align: center
 
+  span
+    overflow: hidden
+    table-layout: fixed
+    text-overflow: ellipsis
+    white-space: nowrap
+
 .song
-  font-weight: bold
   display: block
+  font-weight: bold
   padding-bottom: 5px
