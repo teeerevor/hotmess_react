@@ -36,8 +36,8 @@ class SongAudio extends React.Component {
 }
 
 SongAudio.propTypes = {
-  song: PropTypes.obj.isRequired,
-  playingSong: PropTypes.obj,
+  song: PropTypes.object.isRequired,
+  playingSong: PropTypes.object,
   playing: PropTypes.bool,
   playSong: PropTypes.func,
   pauseSong: PropTypes.func,

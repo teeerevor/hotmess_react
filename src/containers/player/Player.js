@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import * as actions from './actions';
 import Random from '../../components/player/Random';
 import Player from '../../components/player/Player';
-import Logo from '../../components/svgs/Logo';
 import styles from './styles.styl';
 
 export const DEFAULT = 'DEFAULT';
@@ -24,8 +23,7 @@ class PlayerContainer  extends React.Component {
     } = this.props;
     const showRandom = song.id === undefined;
     return (
-      <div className={styles.header}>
-        <Logo className={styles.logo}/>
+      <div className={styles.player}>
         {
           showRandom ?
             <Random onClick={playRandomSong}/>

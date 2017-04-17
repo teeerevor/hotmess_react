@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
 import HomePage from './components/HomePage';
-import Hottest100Page from './containers/Hottest100Page';
+import Hottest100Page from './containers/hottest100Page/Hottest100Page';
 import NotFoundPage from './components/NotFoundPage';
 
 export default (

@@ -1,11 +1,23 @@
 @import '../../styles/colours'
+@import '../../styles/helpers'
 @import 'control_panel'
 
 .box
   display: flex
+  width: 100%
+
+.left
+  display: flex
   justify-content: center
   align-items: center
-  width: 100%
+
+.right, .left
+  flex: 1
+
+.right
+  display: none
+  +media-wider-then(1200px)
+    display: block
 
 .random
   @extend .button-big
