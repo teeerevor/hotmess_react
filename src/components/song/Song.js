@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import Scroll from 'react-scroll';
 import IconPlus           from '../svgs/IconPlus';
 import IconUparrow        from '../svgs/IconUparrow';
 import IconPlay           from '../svgs/IconPlay';
@@ -7,6 +8,7 @@ import SongAudio          from '../song_audio/SongAudio';
 import styles             from './Song.styl';
 import btns               from '../../styles/buttons.styl';
 
+const ScrollElement = Scroll.Element;
 class Song extends React.Component {
   renderAudio = (song, open) => {
     if( open )
@@ -32,6 +34,7 @@ class Song extends React.Component {
 
   render() {
     const {song, sortBy, shortlisted, isOpen} = this.props;
+    const id = this.props.song.id;
 
     let className = styles.song;
     if (isOpen) className = styles.open;
@@ -39,7 +42,8 @@ class Song extends React.Component {
     if (isOpen && shortlisted) className = styles.openAndShortlisted;
 
     return (
-      <li className={className} data-id={this.props.song.id}>
+      <li className={className} data-id={id}>
+        <ScrollElement name={'song'+id} />
         <div className={styles.tag} onClick={this.props.onToggleSongView}>
           {this.arrangeSongInfo(song, sortBy)}
           {this.renderAudio(song, isOpen)}
@@ -59,6 +63,8 @@ Song.propTypes = {
   isOpen: PropTypes.bool,
   shortlisted: PropTypes.bool,
   onToggleSongView: PropTypes.func,
+  onShortlistTop: PropTypes.func,
+  onShortlist: PropTypes.func,
 };
 
 export default Song;

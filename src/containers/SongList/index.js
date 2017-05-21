@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Scroll from 'react-scroll';
 import * as actions from './actions';
 import InlineSvg from '../../components/InlineSvg';
 import Song from '../../components/song/Song';
@@ -10,6 +11,18 @@ import styles from './styles.styl';
 class SongList  extends React.Component {
   componentWillMount() {
     this.props.fetchSongsIfRequired();
+  }
+
+  componentWillReceiveProps(newProps) {
+    const {currentSong} = newProps;
+    const playingNewSong = this.props.currentSong.id === currentSong.id;
+    if( playingNewSong ){
+      Scroll.scroller.scrollTo('song'+currentSong.id, {
+        duration: 1500,
+        delay: 100,
+        smooth: true,
+      });
+    }
   }
 
   renderLoading() {
@@ -44,11 +57,11 @@ class SongList  extends React.Component {
   }
 
   renderSongList() {
-    const {songs, sortBy, openSongs, shortlist, currentSong, playing} = this.props;
+    const {songs, sortBy, openSongs, shortlist} = this.props;
     return(
       <div className="scroller">
         <ul className="big-list list">
-          {songs.map((song, i) => {
+          {songs.map((song) => {
             const open        = _.includes(openSongs, song.id);
             const shortlisted = _.includes(shortlist, song.id);
 
@@ -128,6 +141,7 @@ SongList.propTypes = {
   isFetching: PropTypes.bool,
   filterStart: PropTypes.string,
   filterEnd: PropTypes.string,
+  year: PropTypes.string,
   sortBy: PropTypes.string,
   fetchSongsIfRequired: PropTypes.func,
   toggleSongView: PropTypes.func,
@@ -136,7 +150,10 @@ SongList.propTypes = {
   showMoreSongs: PropTypes.func,
   shortlistSongTop: PropTypes.func,
   shortlistSong: PropTypes.func,
+  showPrevListIndex: PropTypes.func,
+  showNextListIndex: PropTypes.func,
   shortlist: PropTypes.array,
+  currentSong: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
