@@ -19,14 +19,16 @@ class SongAudio extends React.Component {
 
     switch (this.hasAudio(song)) {
       case "youtube":
-        return <YoutubeTrack
-                  className="song-audio"
-                  song={song}
-                  playing={imPlaying}
-                  onPlay={playSong}
-                  onPause={pauseSong}
-                  onEnd={songEnded}
-                />
+        return (
+          <YoutubeTrack
+            className="song-audio"
+            song={song}
+            playing={imPlaying}
+            onPlay={playSong}
+            onPause={pauseSong}
+            onEnd={songEnded}
+          />
+        );
       case "soundclound":
         return( <div /> );
       default:

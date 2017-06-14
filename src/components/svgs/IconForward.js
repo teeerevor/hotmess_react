@@ -3,7 +3,7 @@ import cx from 'classnames';
 import styles from './styles.styl';
 
 const IconForward = ({className}) => {
-  const classes = cx(styles.forward);
+  const classes = cx(styles.forward, className);
   return (
     <svg className={classes} xmlns="http://www.w3.org/2000/svg" width="20" height="13.15" viewBox="0 0 20 13.15" aria-labelledby="title">
       <title id="title"> Icon Next</title>
@@ -11,7 +11,7 @@ const IconForward = ({className}) => {
       <path d="M19.77,5.85A33.53,33.53,0,0,0,12.58.11a0.82,0.82,0,0,0-1.23.61,49.13,49.13,0,0,0,0,11.71,0.82,0.82,0,0,0,1.25.6A34.43,34.43,0,0,0,19.79,7,0.82,0.82,0,0,0,19.77,5.85Z"/>
     </svg>
   );
-}
+};
 
 IconForward.propTypes = {
   className: PropTypes.string,

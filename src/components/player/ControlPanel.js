@@ -13,7 +13,7 @@ import IconRandom from '../svgs/IconRandom';
 
 import styles from './control_panel.styl';
 
-export const ModeIcon = ({mode}) => {
+const ModeIcon = ({mode}) => {
   switch(mode) {
     case REPEAT:
       return <IconSingle />;

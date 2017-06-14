@@ -13,6 +13,15 @@ export default class YoutubeTrack extends React.Component {
     });
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    if ( nextProps.playing !== this.props.playing ){
+      nextProps.playing ?
+        this.player.playVideo()
+        :
+        this.player.pauseVideo();
+    }
+  }
+
   componentWillUnmount() {
     this.player.destroy();
   }
@@ -36,15 +45,6 @@ export default class YoutubeTrack extends React.Component {
 
   ytDivId = () =>
     'yt-video-'+this.props.song.youtube_key;
-
-  componentWillReceiveProps = (nextProps) => {
-    if ( nextProps.playing !== this.props.playing ){
-      nextProps.playing ?
-        this.player.playVideo()
-        :
-        this.player.pauseVideo();
-    }
-  }
 
   render = () =>
     <div id={this.ytDivId()} />

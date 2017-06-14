@@ -30,7 +30,7 @@ const Player = ({
 };
 
 Player.propTypes = {
-  song: PropTypes.obj,
+  song: PropTypes.object,
   playing: PropTypes.bool,
   mode: PropTypes.string,
   onModeChange: PropTypes.func,

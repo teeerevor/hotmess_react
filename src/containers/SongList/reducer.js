@@ -157,14 +157,14 @@ export default function songListReducer(
     }
 
     case NEXT_SONG: {
-      const { currentSong, songs } = state
+      const { currentSong, songs } = state;
       const currentIndex = _.findIndex(songs, (s) => { return s.id == currentSong.id; });
       const nextSong = songs[ currentIndex + 1 ];
       return jumpToSong(state, nextSong);
     }
 
     case PREVIOUS_SONG: {
-      const { currentSong, songs, songData } = state
+      const { currentSong, songs, songData } = state;
       let previousSong;
       let currentIndex = _.findIndex(songs, (s) => { return s.id == currentSong.id; });
       if (currentIndex > 0){
@@ -176,25 +176,25 @@ export default function songListReducer(
       return jumpToSong(state, previousSong);
     }
 
-    case JUMP_TO_SONG:{
+    case JUMP_TO_SONG: {
       return jumpToSong(state, action.song);
     }
 
-    case SHORTLIST_SONG:{
+    case SHORTLIST_SONG: {
       return {
         ...state,
         shortlist: _.concat(state.shortlist, action.songId)
       };
     }
 
-    case SHORTLIST_SONG_TOP:{
+    case SHORTLIST_SONG_TOP: {
       return {
         ...state,
         shortlist: _.concat([action.songId], state.shortlist)
       };
     }
 
-    case DELIST_SONG:{
+    case DELIST_SONG: {
       return {
         ...state,
         shortlist: _.without(state.shortlist, action.songId)

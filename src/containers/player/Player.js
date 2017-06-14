@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './actions';
@@ -15,11 +15,12 @@ export const RANDOM = 'RANDOM';
 class PlayerContainer  extends React.Component {
   render() {
     const {song, playing, mode} = this.props;
-    const { toggleMode,
-            togglePlay,
-            playNextSong,
-            playPrevSong,
-            playRandomSong,
+    const {
+      toggleMode,
+      togglePlay,
+      playNextSong,
+      playPrevSong,
+      playRandomSong,
     } = this.props;
     const showRandom = song.id === undefined;
     return (
@@ -42,6 +43,17 @@ class PlayerContainer  extends React.Component {
     );
   }
 }
+
+PlayerContainer.propTypes = {
+  song: PropTypes.object,
+  playing: PropTypes.bool,
+  mode: PropTypes.string,
+  toggleMode: PropTypes.func,
+  togglePlay: PropTypes.func,
+  playNextSong: PropTypes.func,
+  playPrevSong: PropTypes.func,
+  playRandomSong: PropTypes.func,
+};
 
 const mapStateToProps = (state) => ({
   song: state.songList.currentSong,

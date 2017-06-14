@@ -10,10 +10,6 @@ import {
   SHORTLIST_SONG_TOP,
   SHORTLIST_SONG,
   DELIST_SONG,
-  JUMP_TO_SONG,
-  RANDOM_SONG,
-  NEXT_SONG,
-  PREVIOUS_SONG,
 } from './types';
 
 export const fetchSongsIfRequired = () => (dispatch) =>  {

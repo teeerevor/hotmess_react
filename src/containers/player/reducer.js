@@ -42,12 +42,16 @@ export default function playerReducer(
       switch(state.mode){
         case MODE_SINGLE:
           mode = MODE_CONTINUOUS;
+          break;
         case MODE_CONTINUOUS:
           mode = MODE_REPEAT;
+          break;
         case MODE_REPEAT:
           mode = MODE_RANDOM;
+          break;
         case MODE_RANDOM:
           mode = MODE_SINGLE;
+          break;
       }
 
       return {
