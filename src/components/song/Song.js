@@ -4,7 +4,7 @@ import IconPlus           from '../svgs/IconPlus';
 import IconUparrow        from '../svgs/IconUparrow';
 import IconPlay           from '../svgs/IconPlay';
 import IconTick           from '../svgs/IconTick';
-import SongAudio          from '../song_audio/SongAudio';
+import SongAudio          from '../SongAudio';
 import styles             from './Song.styl';
 import btns               from '../../styles/buttons.styl';
 

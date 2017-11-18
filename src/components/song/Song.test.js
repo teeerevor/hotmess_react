@@ -2,7 +2,7 @@ import React       from 'react';
 import { shallow } from 'enzyme';
 import { expect }  from 'chai';
 import Song        from './Song';
-import SongAudio   from '../song_audio/SongAudio';
+import SongAudio   from '../SongAudio';
 
 function mockItem(overides = {}) {
   let songData = {
