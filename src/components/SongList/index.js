@@ -5,6 +5,8 @@ import Scroll from 'react-scroll';
 import * as actions from './actions';
 import InlineSvg from '../InlineSvg';
 import Song from '../song/Song';
+import Loading from './Loading';
+import Empty from './Empty';
 import _ from 'lodash';
 import styles from './styles.styl';
 
@@ -25,95 +27,72 @@ class SongList  extends React.Component {
     }
   }
 
-  renderLoading() {
-    return(
-      <div className="emptyState">
-        <h4>
-          WOAH THERE!
-        </h4>
-        <p>
-          We're still loading...
-        </p>
-      </div>
-    );
-  }
-
-  renderEmptyState() {
-    let {sortBy, filterStart} = this.props;
-    return(
-      <div className="emptyState">
-        <InlineSvg iconClass={'no-tunes'} iconName={'#no-tunes'} />
-        <h4>
-          WOAH! NO TUNES.
-        </h4>
-        <p>
-          There are no <b>{sortBy}s</b> starting with <b>{filterStart}</b> in this list.
-        </p>
-
-        <button onClick={this.props.showPrevListIndex}>BACK UP!</button>
-        <button onClick={this.props.showNextListIndex}>GO FORTH!</button>
-      </div>
-    );
-  }
-
-  renderSongList() {
-    const {songs, sortBy, openSongs, shortlist} = this.props;
-    return(
-      <div className="scroller">
-        <ul className="big-list list">
-          {songs.map((song) => {
-            const open        = _.includes(openSongs, song.id);
-            const shortlisted = _.includes(shortlist, song.id);
-
-            return (
-              <Song key={song.id}
-                    song={song}
-                    isOpen={open}
-                    shortlisted={shortlisted}
-                    sortBy={sortBy}
-                    onToggleSongView={this.props.toggleSongView.bind(
-                                      this,
-                                      song.id,
-                                      song,
-                                      )}
-                    onShortlistTop={this.props.shortlistSongTop.bind(
-                                      this,
-                                      song.id,
-                                      song,
-                                      )}
-                    onShortlist={this.props.shortlistSong.bind(
-                                      this,
-                                      song.id,
-                                      song,
-                                      )}
-              />
-            );
-          })}
-        </ul>
-      </div>
-    );
-  }
-
   render() {
-    let {songs, sortBy, year, isFetching} = this.props;
-    let section;
+    const {
+      songs,
+      sortBy,
+      openSongs,
+      shortlist,
+      filterStart,
+      year,
+      isFetching
+    } = this.props;
 
-    if (isFetching) {
-      section = this.renderLoading();
-    }else if (songs && songs.length == 0) {
-      section = this.renderEmptyState();
-    } else if (songs && songs.length > 0) {
-      section = this.renderSongList();
-    }
-
-    let sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS";
+    const sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS";
     return (
       <div className={styles.songSection}>
         <nav className={styles.toggleListSort}>
           <a onClick={this.props.toggleSortOrder}>{sortLabel}</a>
         </nav>
         <h3>{year} SONG LIST</h3>
-        {section}
+        { !!isFetching &&
+          <Loading />
+        }
+        { !!songs && songs.length == 0 &&
+          <Empty
+            next={this.props.showPrevListIndex}
+            prev={this.props.showNextListIndex}
+            sortBy={sortBy}
+            filterStart={filterStart}
+          />
+        }
+        { !!songs && songs.length > 0 &&
+          <div className="scroller">
+            <ul className="big-list list">
+              {songs.map((song) => {
+                const open        = _.includes(openSongs, song.id);
+                const shortlisted = _.includes(shortlist, song.id);
+
+                return (
+                  <Song key={song.id}
+                        song={song}
+                        isOpen={open}
+                        shortlisted={shortlisted}
+                        sortBy={sortBy}
+                        onToggleSongView={
+                          this.props.toggleSongView.bind(
+                            this,
+                            song.id,
+                            song,
+                        )}
+                        onShortlistTop={
+                          this.props.shortlistSongTop.bind(
+                          this,
+                          song.id,
+                          song,
+                        )}
+                        onShortlist={
+                          this.props.shortlistSong.bind(
+                          this,
+                          song.id,
+                          song,
+                        )}
+                  />
+                );
+              })}
+            </ul>
+          </div>
+        }
       </div>
     );
   }
@@ -169,4 +148,3 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongList);
-
