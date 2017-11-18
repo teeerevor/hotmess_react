@@ -1,7 +1,7 @@
 import React              from 'react';
 import { shallow } from 'enzyme';
 import { expect }         from 'chai';
-import SongAudio    from './SongAudio';
+import SongAudio    from './index';
 import AudioTrack   from './AudioTrack';
 import YoutubeTrack from './YoutubeTrack';
 
