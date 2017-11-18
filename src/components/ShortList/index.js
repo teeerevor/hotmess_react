@@ -8,7 +8,6 @@ import _ from 'lodash';
 class ShortList  extends React.Component {
   render() {
     const {shortlist, songs} = this.props;
-    debugger
     return(
       <section>
         {
