@@ -31,6 +31,7 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "classnames": "^2.2.5",
+    "grid-styled": "^2.0.0-4",
     "lodash": "^4.17.4",
     "object-assign": "4.1.0",
     "pubsub-js": "^1.5.4",
