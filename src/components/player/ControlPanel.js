@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {
   REPEAT,
   RANDOM,
-} from '../../containers/player/Player';
+} from './index';
 import IconPlay from '../svgs/IconPlay';
 import IconPause from '../svgs/IconPause';
 import IconBack from '../svgs/IconBack';

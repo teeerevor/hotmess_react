@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../containers/player/actions';
+import * as actions from '../player/actions';
 import AudioTrack from './AudioTrack';
 import YoutubeTrack from './YoutubeTrack';
 

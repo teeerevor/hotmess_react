@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './actions';
-import Random from '../../components/player/Random';
-import Player from '../../components/player/Player';
+import Random from './Random';
+import Player from './Player.js';
 import styles from './styles.styl';
 
 export const DEFAULT = 'DEFAULT';

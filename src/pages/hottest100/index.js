@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Logo from '../../components/svgs/Logo';
-import SongList from '../SongList/index';
-import PlayerContainer from '../player/Player';
+import SongList from '../../components/SongList/index';
+import Player from '../../components/player';
 import IndexList from '../../components/indexList/IndexList';
 import styles from './styles.styl';
 
@@ -12,7 +12,7 @@ const Hottest100Page = ({params}) => {
         <div className={styles.logoContainer}>
           <Logo className={styles.logo}/>
         </div>
-        <PlayerContainer />
+        <Player />
       </div>
       <IndexList />
       <SongList year={params.year}/>

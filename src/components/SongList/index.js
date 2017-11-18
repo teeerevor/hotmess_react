@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Scroll from 'react-scroll';
 import * as actions from './actions';
-import InlineSvg from '../../components/InlineSvg';
-import Song from '../../components/song/Song';
+import InlineSvg from '../InlineSvg';
+import Song from '../song/Song';
 import _ from 'lodash';
 import styles from './styles.styl';
 
