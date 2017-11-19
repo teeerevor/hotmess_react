@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import styles from './styles.styl';
 
-export const IconRandom = ({className}) => {
+const IconRandom = ({className}) => {
   const classes = cx(styles.random, className);
   return (
     <svg className={classes} xmlns="http://www.w3.org/2000/svg" width="20" height="13.16" viewBox="0 0 20 13.16" aria-labelledby="title">
@@ -16,3 +16,5 @@ export const IconRandom = ({className}) => {
 IconRandom.propTypes = {
   className: PropTypes.string,
 };
+
+export default IconRandom;

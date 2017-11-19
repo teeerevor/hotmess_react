@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './actions';
 import Random from './Random';
-import Player from './Player.js';
+import Player from './Player';
 import styles from './styles.styl';
 
 export const DEFAULT = 'DEFAULT';
