@@ -5,13 +5,13 @@ import Logo from '../../components/svgs/Logo';
 import SongList from '../../components/SongList';
 import ShortList from '../../components/ShortList';
 import Player from '../../components/player';
-import IndexList from '../../components/indexList/IndexList';
+import IndexList from '../../components/IndexList';
 
 const Header = styled.div`
   padding: 18px;
   border-bottom: solid 3px tomato;
   display: flex;
-`
+`;
 
 const LogoWrapper = styled.div`
   flex: 1;
