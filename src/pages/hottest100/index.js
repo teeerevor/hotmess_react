@@ -7,37 +7,53 @@ import ShortList from '../../components/ShortList';
 import Player from '../../components/player';
 import IndexList from '../../components/IndexList';
 
-const Header = styled.div`
-  padding: 18px;
+const App = styled.div`
+  box-sizing: border-box;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-rows: 80px auto;
+  grid-template-columns: 40px auto 30%;
+  grid-template-areas:
+    "header header header"
+    "index songs shortlist"
+`;
+
+const Header = styled.header`
+  grid-area: header;
+  padding: 16px;
   border-bottom: solid 3px tomato;
   display: flex;
 `;
 
-const LogoWrapper = styled.div`
-  flex: 1;
+const IndexListNav = styled(IndexList)`
+  grid-area: index;
 `;
 
-  //+media-wider-then(700px)
-    //display: block;
+const BigSongList = styled(SongList)`
+  grid-area: songs;
+`;
+
+const SongShortList = styled(ShortList)`
+  grid-area: shortlist;
+`;
 
 const H100Logo = styled(Logo)`
   width: 200px;
   height: 35px;
 `;
 
+
 const Hottest100Page = ({params}) => {
   return (
-    <div>
+    <App>
       <Header>
-        <LogoWrapper>
-          <H100Logo />
-        </LogoWrapper>
+        <H100Logo />
         <Player />
       </Header>
-      <IndexList />
-      <SongList year={params.year}/>
-      <ShortList />
-    </div>
+      <IndexListNav />
+      <BigSongList year={params.year}/>
+      <SongShortList />
+    </App>
   );
 };
 

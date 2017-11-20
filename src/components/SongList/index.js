@@ -3,12 +3,41 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Scroll from 'react-scroll';
 import * as actions from './actions';
-import InlineSvg from '../InlineSvg';
 import Song from '../song/Song';
 import Loading from './Loading';
 import Empty from './Empty';
 import _ from 'lodash';
-import styles from './styles.styl';
+import styled from 'styled-components';
+
+const Heading = styled.h3`
+  margin-top: 0;
+  margin-bottom: 16px;
+`;
+
+const List = styled.div`
+  position: relative;
+  ul {
+    padding: 0;
+  }
+`;
+
+const ToggleListSort = styled.div`
+  position: absolute;
+  right: 0;
+
+  a {
+    cursor: pointer;
+  }
+`;
+
+const Scroller = styled.div`
+  overflow: hidden;
+  position: relative;
+  height: calc(100vh - 80px - 16px);
+  ul {
+    overflow-y: scroll;
+  }
+`;
 
 class SongList  extends React.Component {
   componentWillMount() {
@@ -40,11 +69,11 @@ class SongList  extends React.Component {
 
     const sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS";
     return (
-      <div className={styles.songSection}>
-        <nav className={styles.toggleListSort}>
+      <List>
+        <ToggleListSort>
           <a onClick={this.props.toggleSortOrder}>{sortLabel}</a>
-        </nav>
-        <h3>{year} SONG LIST</h3>
+        </ToggleListSort>
+        <Heading>{year} SONG LIST</Heading>
         { !!isFetching &&
           <Loading />
         }
@@ -57,8 +86,8 @@ class SongList  extends React.Component {
           />
         }
         { !!songs && songs.length > 0 &&
-          <div className="scroller">
-            <ul className="big-list list">
+          <Scroller>
+            <ul>
               {songs.map((song) => {
                 const open        = _.includes(openSongs, song.id);
                 const shortlisted = _.includes(shortlist, song.id);
@@ -91,9 +120,9 @@ class SongList  extends React.Component {
                 );
               })}
             </ul>
-          </div>
+          </Scroller>
         }
-      </div>
+      </List>
     );
   }
 }

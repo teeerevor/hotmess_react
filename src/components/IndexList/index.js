@@ -5,16 +5,13 @@ import * as actions from '../SongList/actions';
 import styled, { css } from 'styled-components';
 import { fromStyleMap } from '../../utils';
 
+const bgColor= '#d3d3d3';
+const fontColor= '#333';
+
 const IndexNav = styled.nav`
-  position: fixed;
-  left: -1px;
-  top: 100px;
   display: flex;
   flex-direction: column;
-  flex: 0 0 35px;
-  min-height: 0px;
-  height: calc(100vh - 100px);
-  width: 40px;
+  height: calc(100vh - 80px - 16px);
 `;
 
 const IndexButtonMap = {
@@ -26,17 +23,16 @@ const IndexButtonMap = {
     text-align: center;
     vertical-align: middle;
     text-decoration: none;
-    background-color: $index_bg_color;
-    color: $index_font_color;
+    background-color: ${bgColor};
+    color: ${fontColor};
     cursor: pointer;
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 5px;
-    border-top-right-radius: 5px;
+    border-radius: 5px;
     border-top-left-radius: 0;
-    border-bottom-right-radius: 5px;
     border-bottom-left-radius: 0;
     margin-bottom: 1px;
 
@@ -45,7 +41,7 @@ const IndexButtonMap = {
     }
   `,
   active: css`
-    background-color: rgba(255, 99, 71, 0.4);
+    background-color: rgba(255, 99, 71, 0.8);
     border-color: #dcb5af;
     color: white;
   `
