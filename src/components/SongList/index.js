@@ -2,19 +2,20 @@ import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { animateScroll as scroller } from 'react-scroll';
+import styled from 'styled-components';
+
 import * as actions from './actions';
 import Song from '../song/Song';
 import Loading from './Loading';
 import Empty from './Empty';
 import includes from 'lodash/includes';
-import styled from 'styled-components';
 
 const Heading = styled.h3`
   margin-top: 0;
   margin-bottom: 16px;
 `;
 
-const List = styled.div`
+const List = styled.section`
   position: relative;
   overflow-y: scroll;
   height: calc(100vh - 80px - 16px);
@@ -28,7 +29,7 @@ const List = styled.div`
 
 const ToggleListSort = styled.div`
   position: absolute;
-  right: 0;
+  right: 16px;
 
   a {
     cursor: pointer;

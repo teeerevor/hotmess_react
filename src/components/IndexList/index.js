@@ -9,6 +9,7 @@ const bgColor= '#d3d3d3';
 const fontColor= '#333';
 
 const IndexNav = styled.nav`
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 80px - 16px);
