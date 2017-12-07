@@ -10,12 +10,12 @@ import IndexList from '../../components/IndexList';
 const App = styled.div`
   box-sizing: border-box;
   display: grid;
-  grid-gap: 16px;
+  grid-column-gap: 16px;
   grid-template-rows: 80px auto;
   grid-template-columns: 40px auto 30%;
   grid-template-areas:
     "header header header"
-    "index songs shortlist"
+    "index songs shortlist";
 `;
 
 const Header = styled.header`

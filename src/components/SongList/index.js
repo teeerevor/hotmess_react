@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Scroll from 'react-scroll';
+import { animateScroll as scroller } from 'react-scroll';
 import * as actions from './actions';
 import Song from '../song/Song';
 import Loading from './Loading';
 import Empty from './Empty';
-import _ from 'lodash';
+import includes from 'lodash/includes';
 import styled from 'styled-components';
 
 const Heading = styled.h3`
@@ -16,8 +16,13 @@ const Heading = styled.h3`
 
 const List = styled.div`
   position: relative;
+  overflow-y: scroll;
+  height: calc(100vh - 80px - 16px);
+  padding-top: 16px;
+  padding-right: 16px;
   ul {
     padding: 0;
+    margin: 0;
   }
 `;
 
@@ -30,15 +35,6 @@ const ToggleListSort = styled.div`
   }
 `;
 
-const Scroller = styled.div`
-  overflow: hidden;
-  position: relative;
-  height: calc(100vh - 80px - 16px);
-  ul {
-    overflow-y: scroll;
-  }
-`;
-
 class SongList  extends React.Component {
   componentWillMount() {
     this.props.fetchSongsIfRequired();
@@ -46,12 +42,13 @@ class SongList  extends React.Component {
 
   componentWillReceiveProps(newProps) {
     const {currentSong} = newProps;
-    const playingNewSong = this.props.currentSong.id === currentSong.id;
-    if( playingNewSong ){
-      Scroll.scroller.scrollTo('song'+currentSong.id, {
+    const sameSong = this.props.currentSong.id === currentSong.id;
+    if( !sameSong ){
+      scroller.scrollTo('song'+currentSong.id, {
         duration: 1500,
         delay: 100,
-        smooth: true,
+        smooth: 'easeInOutCubic',
+        containerId: 'songList',
       });
     }
   }
@@ -69,7 +66,7 @@ class SongList  extends React.Component {
 
     const sortLabel = sortBy === 'song' ? "Sorted by SONGS" : "Sorted by ARTISTS";
     return (
-      <List>
+      <List className="songList">
         <ToggleListSort>
           <a onClick={this.props.toggleSortOrder}>{sortLabel}</a>
         </ToggleListSort>
@@ -86,41 +83,39 @@ class SongList  extends React.Component {
           />
         }
         { !!songs && songs.length > 0 &&
-          <Scroller>
-            <ul>
-              {songs.map((song) => {
-                const open        = _.includes(openSongs, song.id);
-                const shortlisted = _.includes(shortlist, song.id);
+          <ul>
+            {songs.map((song) => {
+              const open        = includes(openSongs, song.id);
+              const shortlisted = includes(shortlist, song.id);
 
-                return (
-                  <Song key={song.id}
-                        song={song}
-                        isOpen={open}
-                        shortlisted={shortlisted}
-                        sortBy={sortBy}
-                        onToggleSongView={
-                          this.props.toggleSongView.bind(
-                            this,
-                            song.id,
-                            song,
-                        )}
-                        onShortlistTop={
-                          this.props.shortlistSongTop.bind(
+              return (
+                <Song key={song.id}
+                      song={song}
+                      isOpen={open}
+                      shortlisted={shortlisted}
+                      sortBy={sortBy}
+                      onToggleSongView={
+                        this.props.toggleSongView.bind(
                           this,
                           song.id,
                           song,
-                        )}
-                        onShortlist={
-                          this.props.shortlistSong.bind(
+                      )}
+                      onShortlistTop={
+                        this.props.shortlistSongTop.bind(
                           this,
                           song.id,
                           song,
-                        )}
-                  />
-                );
-              })}
-            </ul>
-          </Scroller>
+                      )}
+                      onShortlist={
+                        this.props.shortlistSong.bind(
+                          this,
+                          song.id,
+                          song,
+                      )}
+                />
+              );
+            })}
+          </ul>
         }
       </List>
     );
