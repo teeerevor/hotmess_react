@@ -105,21 +105,6 @@ const SongItem = styled.li`
   ${fromStyleMap(SongItemMap)};
 `;
 
-const Audio = styled.div`
-  height: 0;
-  padding-bottom: 56.25%;
-  margin-top: 15px;
-  position: relative;
-  width: 100%;
-
-  iframe {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
-`;
 
 const Song = ({
   song,
@@ -149,9 +134,7 @@ const Song = ({
           <b>{title}</b> - {additional}
         </span>
         {isOpen &&
-            <Audio>
-              <SongAudio song={song} />
-            </Audio>
+          <SongAudio song={song} />
         }
         <PlayIcon />
         <SelectedIcon />
