@@ -1,40 +1,64 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import styled from 'styled-components';
+
 import * as actions from '../player/actions';
 import AudioTrack from './AudioTrack';
 import YoutubeTrack from './YoutubeTrack';
 
-class SongAudio extends React.Component {
-  hasAudio(song){
+const Audio = styled.div`
+  height: 0;
+  padding-bottom: 56.25%;
+  margin-top: 15px;
+  position: relative;
+  width: 100%;
+
+  iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+`;
+
+const hasAudio = (song) => {
     if(song.youtube_key) return "youtube";
     if(song.soundclound_key) return "soundclound";
     return "JJJ";
-  }
+};
 
-  render() {
-    const {song, playingSong, playing} = this.props;
-    const {playSong, pauseSong, songEnded} = this.props;
-    const imPlaying = song.id === playingSong.id && playing;
+const SongAudio = ({
+  song,
+  playingSong,
+  playing,
+  playSong,
+  pauseSong,
+  songEnded,
+}) => {
+  const imPlaying = song.id === playingSong.id && playing;
 
-    switch (this.hasAudio(song)) {
-      case "youtube":
-        return (
-          <YoutubeTrack
-            className="song-audio"
-            song={song}
-            playing={imPlaying}
-            onPlay={playSong}
-            onPause={pauseSong}
-            onEnd={songEnded}
-          />
-        );
-      case "soundclound":
-        return( <div /> );
-      default:
-        return( <AudioTrack className="song-audio" song={this.props.song} /> );
-    }
-  }
+  return (
+    <Audio>
+      { hasAudio(song) === "youtube" &&
+        <YoutubeTrack
+          className="song-audio"
+          song={song}
+          playing={imPlaying}
+          onPlay={playSong}
+          onPause={pauseSong}
+          onEnd={songEnded}
+        />
+      }
+      { hasAudio(song) === "soundclound" &&
+        <div />
+      }
+      { hasAudio(song) === "JJJ" &&
+        <AudioTrack className="song-audio" song={song} />
+      }
+    </Audio>
+  );
 }
 
 SongAudio.propTypes = {
