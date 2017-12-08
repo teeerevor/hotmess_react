@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import find from 'lodash/find';
 
-import Song from '../song/Song';
+import Song from '../Song';
 import * as actions from '../SongList/actions';
 
 const List = styled.section`

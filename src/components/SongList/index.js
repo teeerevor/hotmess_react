@@ -5,7 +5,7 @@ import { animateScroll as scroller } from 'react-scroll';
 import styled from 'styled-components';
 
 import * as actions from './actions';
-import Song from '../song/Song';
+import Song from '../Song';
 import Loading from './Loading';
 import Empty from './Empty';
 import includes from 'lodash/includes';
