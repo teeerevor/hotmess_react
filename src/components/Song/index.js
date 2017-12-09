@@ -8,8 +8,7 @@ import IconPlus           from '../svgs/IconPlus';
 import IconUparrow        from '../svgs/IconUparrow';
 import IconPlay           from '../svgs/IconPlay';
 import IconTick           from '../svgs/IconTick';
-
-import btns               from '../../styles/buttons.styl';
+import CircleButton       from '../CircleButton';
 
 const darkGrey = '#dcdcdc';
 const lightGrey = '#eee';
@@ -139,8 +138,8 @@ const Song = ({
         <PlayIcon />
         <SelectedIcon />
       </Tag>
-      <button className={btns.circleButton} onClick={onShortlistTop} > <IconUparrow /> </button>
-      <button className={btns.circleButton} onClick={onShortlist} > <IconPlus /> </button>
+      <CircleButton onClick={onShortlistTop} > <IconUparrow /> </CircleButton>
+      <CircleButton onClick={onShortlist} > <IconPlus /> </CircleButton>
     </SongItem>
   );
 };
