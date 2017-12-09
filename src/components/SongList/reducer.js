@@ -11,6 +11,7 @@ import {
   TOGGLE_SONG_VIEW,
   SHORTLIST_SONG_TOP,
   SHORTLIST_SONG,
+  MOVE_SONG_TO_TOP,
   DELIST_SONG,
   JUMP_TO_SONG,
   RANDOM_SONG,
@@ -191,6 +192,14 @@ export default function songListReducer(
       return {
         ...state,
         shortlist: _.concat([action.songId], state.shortlist)
+      };
+    }
+
+    case MOVE_SONG_TO_TOP:{
+      const temp= _.without(state.shortlist, action.songId);
+      return {
+        ...state,
+        shortlist: _.concat([action.songId], temp)
       };
     }
 

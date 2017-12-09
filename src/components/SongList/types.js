@@ -10,6 +10,7 @@ export const TOGGLE_SONG_ORDERING     = 'TOGGLE_SONG_ORDERING';
 export const TOGGLE_SONG_VIEW         = 'TOGGLE_SONG_VIEW';
 export const SHORTLIST_SONG_TOP       = 'SHORTLIST_SONG_TOP';
 export const SHORTLIST_SONG           = 'SHORTLIST_SONG';
+export const MOVE_SONG_TO_TOP         = 'MOVE_SONG_TO_TOP';
 export const DELIST_SONG              = 'DELIST_SONG';
 export const JUMP_TO_SONG             = 'JUMP_TO_SONG';
 

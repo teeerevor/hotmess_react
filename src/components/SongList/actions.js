@@ -9,6 +9,7 @@ import {
   TOGGLE_SONG_VIEW,
   SHORTLIST_SONG_TOP,
   SHORTLIST_SONG,
+  MOVE_SONG_TO_TOP,
   DELIST_SONG,
 } from './types';
 
@@ -106,6 +107,13 @@ export const shortlistSong = (songId, song) => (dispatch) => {
       type: SHORTLIST_SONG,
       songId,
       song,
+  });
+};
+
+export const moveSongToTop = (songId) => (dispatch) => {
+  dispatch({
+      type: MOVE_SONG_TO_TOP,
+      songId,
   });
 };
 

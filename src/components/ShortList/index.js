@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import find from 'lodash/find';
 
-import Song from '../Song';
 import * as actions from '../SongList/actions';
+import ShortListItem from './ShortListItem';
 
 const List = styled.section`
   padding-top: 16px;
@@ -17,7 +17,14 @@ const Heading = styled.h3`
 `;
 
 const PickPlaceholder = styled.li`
+  border-bottom: 2px #dddddd dashed;
+  color: #999;
+  font-weight: bold;
+  letter-spacing: 0.5px;
   list-style-type: none;
+  margin-bottom: 3px;
+  margin-right: 90px;
+  padding: 13px 15px;
 `;
 
 
@@ -31,14 +38,28 @@ class ShortList  extends React.Component {
           shortlist.map((songId) => {
             const song = find(songs, {id: songId});
             return(
-              <Song key={song.id} song={song} />
+              <ShortListItem
+                key={song.id}
+                song={song}
+                onMoveToTop={
+                  this.props.moveSongToTop.bind(
+                    this,
+                    song.id,
+                )}
+                onRemove={
+                  this.props.delistSong.bind(
+                    this,
+                    song.id,
+                )}
+                onScrollToSong={null}
+              />
             );
           })
         }
         {
           [...Array(10).keys()].map(pick =>
             pick >= shortlist.length ?
-              <PickPlaceholder key={pick + 1} > Pick {pick + 1} </PickPlaceholder>
+              <PickPlaceholder key={pick + 1} > PICK {pick + 1} </PickPlaceholder>
               :
               null
           )
@@ -52,6 +73,8 @@ class ShortList  extends React.Component {
 ShortList.propTypes = {
   shortlist: PropTypes.array,
   songs: PropTypes.array,
+  delistSong: PropTypes.func,
+  moveSongToTop: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
